@@ -1,0 +1,52 @@
+{
+ "reference_pairs": 697,
+ "detected_physical": 704,
+ "detected_hard": 687,
+ "tp": 696,
+ "fp": 8,
+ "fn": 1,
+ "precision": 0.9886363636363636,
+ "recall": 0.9985652797704447,
+ "f1": 0.9935760171306209,
+ "hard_only_recall": 0.9856527977044476,
+ "fp_pairs": [
+  [
+   "Snowdon_Towers_Sample_Structural:0b0a2419-9317-4b98-9c16-1b23aa188460-000a5318",
+   "Snowdon_Towers_Sample_Plumbing:1bbc8bf2-41eb-4f2a-8dea-eccad3b5b149-0017c34c"
+  ],
+  [
+   "Snowdon_Towers_Sample_Structural:0b0a2419-9317-4b98-9c16-1b23aa188460-000a5318",
+   "Snowdon_Towers_Sample_Plumbing:38045a9c-8c58-4bc7-8156-258992ae40c8-0017500b"
+  ],
+  [
+   "Snowdon_Towers_Sample_Structural:0b0a2419-9317-4b98-9c16-1b23aa188460-000a5318",
+   "Snowdon_Towers_Sample_Plumbing:38045a9c-8c58-4bc7-8156-258992ae40c8-00175028"
+  ],
+  [
+   "Snowdon_Towers_Sample_Structural:0b0a2419-9317-4b98-9c16-1b23aa188460-000a5318",
+   "Snowdon_Towers_Sample_Plumbing:38045a9c-8c58-4bc7-8156-258992ae40c8-0017502c"
+  ],
+  [
+   "Snowdon_Towers_Sample_Structural:20dabff6-6a34-4506-9139-9613345ec958-000a8099",
+   "Snowdon_Towers_Sample_Plumbing:ae734a7f-7a2f-4836-ab47-33df479e8e2c-0016e71d"
+  ],
+  [
+   "Snowdon_Towers_Sample_Structural:54ce3320-0d0c-4217-b277-cd230cc4e4cb-000c1867",
+   "Snowdon_Towers_Sample_Plumbing:13b31e5b-ce32-47d8-90f4-469133ed5ea5-001937a0"
+  ],
+  [
+   "Snowdon_Towers_Sample_Structural:de2781c1-f964-4812-81d5-8f16b6a9ff61-00093315",
+   "Snowdon_Towers_Sample_Plumbing:38045a9c-8c58-4bc7-8156-258992ae40c8-0017502e"
+  ],
+  [
+   "Snowdon_Towers_Sample_Structural:de2781c1-f964-4812-81d5-8f16b6a9ff61-00093315",
+   "Snowdon_Towers_Sample_Plumbing:38045a9c-8c58-4bc7-8156-258992ae40c8-0017503c"
+  ]
+ ],
+ "fn_pairs": [
+  [
+   "Snowdon_Towers_Sample_Structural:54ce3320-0d0c-4217-b277-cd230cc4e4cb-000c1c9d",
+   "Snowdon_Towers_Sample_Plumbing:4c79c4be-236a-4873-92be-63ae52428538-00170b1f"
+  ]
+ ]
+}

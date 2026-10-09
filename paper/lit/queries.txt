@@ -1,0 +1,27 @@
+# Clash detection in BIM
+BIM clash detection automation
+clash relevance machine learning BIM
+clash detection MEP structural coordination
+spatial conflict coordination MEP BIM
+clash resolution building information modeling
+irrelevant clashes false positives BIM coordination
+# Digital twin in AEC
+digital twin construction industry review
+construction digital twin semantic
+digital twin building information modelling synchronization
+# Load path / structural graph
+structural load path graph theory building
+load path analysis structural building information model
+structural analytical model BIM interpretation
+graph-based representation building elements connectivity BIM
+# Rule checking & automation
+automated rule-based checking building design BIM
+Revit API automation Python
+visual programming Dynamo BIM automation
+# Structural impact of penetrations
+web openings beams strength penetration
+openings in reinforced concrete beams shear capacity
+# Methods
+collision detection oriented bounding box hierarchy
+R-tree spatial index dynamic
+explainable machine learning SHAP construction

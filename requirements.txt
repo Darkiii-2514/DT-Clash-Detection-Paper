@@ -1,0 +1,39 @@
+# --- Core numerics / data ---
+numpy
+scipy
+pandas
+pyyaml
+tqdm
+
+# --- BIM / IFC + geometry (clash detection) ---
+ifcopenshell        # IFC parsing + geometry (model-agnostic validation path)
+trimesh             # mesh ops, AABB/OBB, intersections
+manifold3d          # robust mesh booleans for penetration volume
+python-fcl          # narrow-phase collision + penetration depth
+rtree               # R-tree broad-phase spatial index
+shapely             # 2D footprint / section checks
+
+# --- Load path graph + severity classification ---
+networkx            # structural load-path graph
+scikit-learn        # severity classifiers + metrics
+xgboost             # gradient-boosted severity model
+imbalanced-learn    # class imbalance (few critical clashes)
+shap                # feature attribution for explainability
+
+# --- Visualisation / figures for the paper ---
+matplotlib
+seaborn
+plotly
+kaleido             # static export of plotly figures
+
+# --- Notebooks / testing ---
+jupyterlab
+ipykernel
+pytest
+
+# --- Writing & references ---
+python-docx
+openpyxl
+bibtexparser
+habanero            # Crossref lookup for citation verification
+requests

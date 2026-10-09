@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+data/raw/
+*.log
+~$*.docx
+*.rvt.bak
+*.0001.rvt
+
+# regenerable / binary outputs
+*.db
+data/twin/
+paper/_build.md
+paper/preview/
+paper/figures/src/example_*.png
+results/*/renders/

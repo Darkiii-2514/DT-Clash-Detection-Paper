@@ -1,0 +1,47 @@
+# key | doi | why it is cited
+# --- clash detection & coordination
+akponeware2017 | 10.3390/buildings7030075 | clash detection vs avoidance; coordination problems
+chahrour2021 | 10.1080/01446193.2020.1802768 | cost-benefit of clash detection/resolution
+hu2019crp | 10.1061/(asce)cp.1943-5487.0000810 | clash relevance prediction with ML (irrelevant clashes)
+hu2019cdn | 10.1016/j.autcon.2019.102832 | component dependent network for holistic clash detection
+lin2019filter | 10.3390/app9245324 | hybrid rule-based + ML filtering of irrelevant clashes
+autcon2025relevance | 10.1016/j.autcon.2025.106644 | ML clash relevance filtering (recent AiC)
+jcem2026risk | 10.1061/jcemd4.coeng-17676 | risk and relevance analysis for clash resolution
+buildings2026triage | 10.3390/buildings16040690 | AI framework for clash triage (conceptual)
+bitaraf2024 | 10.3390/buildings14113611 | BIM-based clash prioritisation
+wang2016 | 10.1016/j.autcon.2015.12.020 | formalised knowledge for MEP spatial conflict coordination
+hsu2020kbs | 10.1016/j.autcon.2019.103001 | knowledge-based clash resolution
+radke2020qlearn | 10.1016/j.autcon.2019.103062 | automated clash resolution via Q-learning (rebar)
+hu2020sequence | 10.1016/j.autcon.2020.103205 | clash correction sequence via dependency network
+hu2021changelist | 10.1061/(asce)co.1943-7862.0002092 | component change list prediction, graph perspective
+autcon2025ar | 10.1016/j.autcon.2025.106501 | MEP-structural clash coordination with path planning + AR
+xie2022mep | 10.3390/buildings12070934 | automated rule checking for MEP systems
+# --- rule checking / automation
+eastman2009 | 10.1016/j.autcon.2009.07.002 | automatic rule-based checking
+solihin2015 | 10.1016/j.autcon.2015.03.003 | classification of rules for BIM rule checking
+zhang2013safety | 10.1016/j.autcon.2012.05.006 | BIM automatic safety checking
+ramaji2018 | 10.1016/j.autcon.2018.02.025 | structural analytical model from coordination view
+# --- digital twin
+boje2020 | 10.1016/j.autcon.2020.103179 | semantic construction digital twin
+sacks2020 | 10.1017/dce.2020.16 | construction with digital twin information systems
+opoku2021 | 10.1016/j.jobe.2021.102726 | DT in construction review
+deng2021 | 10.36680/j.itcon.2021.005 | from BIM to digital twins
+jiang2021 | 10.1016/j.compind.2021.103469 | digital twin paradigm review
+kritzinger2018 | 10.1016/j.ifacol.2018.08.474 | DT taxonomy: digital model / shadow / twin
+hu2024shm | 10.1016/j.eswa.2024.124204 | BIM-enabled DT for real-time SHM
+# --- structural robustness / load paths / openings
+starossek2010measures | 10.1080/15732479.2010.501562 | measures of structural robustness
+starossek2010terminology | 10.1061/(asce)cf.1943-5509.0000138 | disproportionate collapse terminology
+mckay2012 | 10.1061/(asce)sc.1943-5576.0000126 | alternate path method
+zhao2020ustar | 10.1016/j.aei.2020.101184 | U* load transfer index (load path)
+ahmed2012openings | 10.1016/j.matdes.2012.03.001 | RC beams with web openings review
+lawson2017 | 10.1002/stco.201710020 | large web openings in steel/composite beams
+mostofinejad2020 | 10.1016/j.istruc.2020.03.061 | openings and punching shear in slabs
+shear2022nearsupport | 10.1016/j.istruc.2022.01.040 | RC beams with web openings near supports
+# --- algorithms & tools
+guttman1984 | 10.1145/971697.602266 | R-tree
+vandenbergen1997 | 10.1080/10867651.1997.10487480 | AABB trees for collision detection
+gottschalk1996 | 10.1145/237170.237244 | OBBTree
+pan2012fcl | 10.1109/icra.2012.6225337 | FCL collision library
+lengauer1979 | 10.1145/357062.357071 | dominators in flowgraphs
+chen2016xgboost | 10.1145/2939672.2939785 | XGBoost

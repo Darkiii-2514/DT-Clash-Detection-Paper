@@ -1,0 +1,278 @@
+{
+ "schema_version": 1,
+ "mode": "architecture",
+ "template_type": "architecture",
+ "style": 4,
+ "quality_profile": "standard",
+ "text_policy": "strict",
+ "width": 1230,
+ "height": 600,
+ "title": "Digital twin-enabled structural clash framework",
+ "subtitle": "Revit 2027 authoring model and Python analysis service, synchronised in both directions",
+ "containers": [
+  {
+   "id": "revit",
+   "x": 40,
+   "y": 120,
+   "width": 360,
+   "height": 420,
+   "label": "Revit 2027 · pyRevit"
+  },
+  {
+   "id": "exchange",
+   "x": 440,
+   "y": 120,
+   "width": 180,
+   "height": 420,
+   "label": "JSON exchange"
+  },
+  {
+   "id": "service",
+   "x": 660,
+   "y": 120,
+   "width": 530,
+   "height": 420,
+   "label": "Analysis service · CPython"
+  }
+ ],
+ "nodes": [
+  {
+   "id": "model",
+   "kind": "double_rect",
+   "x": 90,
+   "y": 160,
+   "width": 270,
+   "height": 72,
+   "type_label": "AUTHORING MODEL",
+   "label": "Federated Revit model",
+   "sublabel": "structural host + MEP links",
+   "fill": "#ffffff",
+   "stroke": "#e5e7eb",
+   "flat": true
+  },
+  {
+   "id": "extractor",
+   "kind": "rect",
+   "x": 90,
+   "y": 300,
+   "width": 270,
+   "height": 72,
+   "type_label": "REVIT API",
+   "label": "Extractor + change hook",
+   "sublabel": "geometry · attributes · joins",
+   "fill": "#ffffff",
+   "stroke": "#e5e7eb",
+   "flat": true
+  },
+  {
+   "id": "writeback",
+   "kind": "rect",
+   "x": 90,
+   "y": 440,
+   "width": 270,
+   "height": 72,
+   "type_label": "WRITE-BACK",
+   "label": "Show Severity command",
+   "sublabel": "view overrides + markers",
+   "fill": "#ffffff",
+   "stroke": "#e5e7eb",
+   "flat": true
+  },
+  {
+   "id": "inbox",
+   "kind": "cylinder",
+   "x": 462,
+   "y": 304,
+   "width": 136,
+   "height": 64,
+   "label": "Inbox",
+   "sublabel": "exports · deltas",
+   "fill": "#f9fafb",
+   "stroke": "#e5e7eb"
+  },
+  {
+   "id": "outbox",
+   "kind": "cylinder",
+   "x": 462,
+   "y": 444,
+   "width": 136,
+   "height": 64,
+   "label": "Outbox",
+   "sublabel": "results",
+   "fill": "#f9fafb",
+   "stroke": "#e5e7eb"
+  },
+  {
+   "id": "twin",
+   "kind": "hexagon",
+   "x": 684,
+   "y": 300,
+   "width": 226,
+   "height": 72,
+   "type_label": "DIGITAL TWIN",
+   "label": "Twin state",
+   "sublabel": "diff · incremental · SQLite",
+   "fill": "#ffffff",
+   "stroke": "#3b82f6",
+   "stroke_width": 1.6,
+   "flat": true
+  },
+  {
+   "id": "loadpath",
+   "kind": "rect",
+   "x": 944,
+   "y": 160,
+   "width": 212,
+   "height": 72,
+   "type_label": "STRUCTURE",
+   "label": "Load-path graph",
+   "sublabel": "rules · tributary · dominators",
+   "fill": "#ffffff",
+   "stroke": "#e5e7eb",
+   "flat": true
+  },
+  {
+   "id": "clash",
+   "kind": "rect",
+   "x": 944,
+   "y": 300,
+   "width": 212,
+   "height": 72,
+   "type_label": "GEOMETRY",
+   "label": "Clash detection",
+   "sublabel": "R-tree · FCL · Manifold",
+   "fill": "#ffffff",
+   "stroke": "#e5e7eb",
+   "flat": true
+  },
+  {
+   "id": "severity",
+   "kind": "rect",
+   "x": 944,
+   "y": 440,
+   "width": 212,
+   "height": 72,
+   "type_label": "CLASSIFICATION",
+   "label": "Severity",
+   "sublabel": "local impact × consequence",
+   "fill": "#ffffff",
+   "stroke": "#e5e7eb",
+   "flat": true
+  }
+ ],
+ "arrows": [
+  {
+   "id": "a1-read",
+   "source": "model",
+   "target": "extractor",
+   "source_port": "bottom",
+   "target_port": "top",
+   "flow": "read",
+   "label": "Revit API"
+  },
+  {
+   "id": "a2-push",
+   "source": "extractor",
+   "target": "inbox",
+   "source_port": "right",
+   "target_port": "left",
+   "flow": "data",
+   "label": "JSON"
+  },
+  {
+   "id": "a3-apply",
+   "source": "inbox",
+   "target": "twin",
+   "source_port": "right",
+   "target_port": "left",
+   "flow": "data"
+  },
+  {
+   "id": "a4-detect",
+   "source": "twin",
+   "target": "clash",
+   "source_port": "right",
+   "target_port": "left",
+   "flow": "control"
+  },
+  {
+   "id": "a5-graph",
+   "source": "twin",
+   "target": "loadpath",
+   "source_port": "top",
+   "target_port": "left",
+   "flow": "control",
+   "route_points": [
+    [
+     797,
+     196
+    ]
+   ]
+  },
+  {
+   "id": "a6-clashes",
+   "source": "clash",
+   "target": "severity",
+   "source_port": "bottom",
+   "target_port": "top",
+   "flow": "data"
+  },
+  {
+   "id": "a7-lpci",
+   "source": "loadpath",
+   "target": "severity",
+   "source_port": "right",
+   "target_port": "right",
+   "flow": "data",
+   "label": "LPCI",
+   "route_points": [
+    [
+     1168,
+     196
+    ],
+    [
+     1168,
+     476
+    ]
+   ]
+  },
+  {
+   "id": "b1-publish",
+   "source": "severity",
+   "target": "outbox",
+   "source_port": "left",
+   "target_port": "right",
+   "flow": "data"
+  },
+  {
+   "id": "b2-read",
+   "source": "outbox",
+   "target": "writeback",
+   "source_port": "left",
+   "target_port": "right",
+   "flow": "read"
+  },
+  {
+   "id": "b3-feedback",
+   "source": "writeback",
+   "target": "model",
+   "source_port": "left",
+   "target_port": "left",
+   "flow": "feedback",
+   "label": "write-back",
+   "route_points": [
+    [
+     62,
+     476
+    ],
+    [
+     62,
+     196
+    ]
+   ]
+  }
+ ],
+ "footer": "Revit → twin: document-changed deltas · twin → Revit: colour overrides and clash markers",
+ "footer_x": 48,
+ "footer_y": 578
+}

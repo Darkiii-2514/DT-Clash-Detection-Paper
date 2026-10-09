@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1230 600" width="1230" height="600" data-generator="fireworks-tech-graph" data-schema-version="1" data-text-metrics="heuristic-v1" data-style-id="4" data-visual-theme="Notion Clean" data-diagram-type="architecture" data-motion-scene="" data-semantic-profile="generic" data-semantic-valid="true" data-quality-profile="standard" data-max-bends-per-edge="12" data-max-total-bends="100" data-max-route-stretch="5.0" data-max-bridged-crossings="8" data-min-node-gap="0.0" data-min-container-gutter="0.0" data-min-label-clearance="2.0" data-min-segment-length="0.0">
+  <defs>
+    <marker id="arrowA" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrowB" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrowC" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrowE" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrowF" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#9ca3af"/>
+    </marker>
+    <marker id="arrowG" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#9ca3af"/>
+    </marker>
+    <marker id="arrowH" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#d1d5db"/>
+    </marker>
+    <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, 'PingFang SC', 'Noto Sans CJK SC', 'Microsoft YaHei', 'Microsoft JhengHei', 'SimHei', sans-serif; }
+    .title { font-size: 18px; font-weight: 700; fill: #111827; }
+    .subtitle { font-size: 13px; font-weight: 500; fill: #9ca3af; }
+    .section { font-size: 13px; font-weight: 700; fill: #6b7280; letter-spacing: 1.4px; }
+    .section-sub { font-size: 12px; font-weight: 500; fill: #6b7280; }
+    .node-title { font-weight: 700; fill: #111827; }
+    .node-sub { font-weight: 500; fill: #374151; }
+    .node-type { font-size: 11px; font-weight: 700; fill: #6b7280; letter-spacing: 0.08em; }
+    .arrow-label { font-size: 12px; font-weight: 600; fill: #6b7280; }
+    .legend { font-size: 12px; font-weight: 500; fill: #6b7280; }
+    .footnote { font-size: 12px; font-weight: 500; fill: #6b7280; }
+    .metric-label { font-size: 8.5px; font-weight: 700; fill: #6b7280; text-transform: uppercase; }
+    .metric-value { font-size: 9.5px; font-weight: 700; fill: #111827; }
+    </style>
+  </defs>
+  <rect data-graph-role="background" width="1230.0" height="600.0" fill="#ffffff"/>
+  <text x="48.0" y="48" text-anchor="start" class="title">Digital twin-enabled structural clash framework</text>
+  <text x="48.0" y="72" text-anchor="start" class="subtitle">Revit 2027 authoring model and Python analysis service, synchronised in both directions</text>
+  <line x1="48" y1="100" x2="1182.0" y2="100" stroke="#e5e7eb" stroke-width="1"/>
+  <g id="revit" data-graph-role="container" data-container-id="revit" data-semantic-role="boundary" data-graph-bounds="40,120,400,540">
+  <rect data-graph-role="container" x="40.0" y="120.0" width="360.0" height="420.0" rx="4.0" fill="none" stroke="#e5e7eb" stroke-width="1.4"/>
+  <text x="58.0" y="144.0" class="section">REVIT 2027 · PYREVIT</text>
+    <rect id="revit-header" data-graph-role="reserved" data-reserved-kind="container-header" x="48" y="126" width="165.46" height="30" fill="none" stroke="none"/>
+  </g>
+  <g id="exchange" data-graph-role="container" data-container-id="exchange" data-semantic-role="boundary" data-graph-bounds="440,120,620,540">
+  <rect data-graph-role="container" x="440.0" y="120.0" width="180.0" height="420.0" rx="4.0" fill="none" stroke="#e5e7eb" stroke-width="1.4"/>
+  <text x="458.0" y="144.0" class="section">JSON EXCHANGE</text>
+    <rect id="exchange-header" data-graph-role="reserved" data-reserved-kind="container-header" x="448" y="126" width="125.16" height="30" fill="none" stroke="none"/>
+  </g>
+  <g id="service" data-graph-role="container" data-container-id="service" data-semantic-role="boundary" data-graph-bounds="660,120,1190,540">
+  <rect data-graph-role="container" x="660.0" y="120.0" width="530.0" height="420.0" rx="4.0" fill="none" stroke="#e5e7eb" stroke-width="1.4"/>
+  <text x="678.0" y="144.0" class="section">ANALYSIS SERVICE · CPYTHON</text>
+    <rect id="service-header" data-graph-role="reserved" data-reserved-kind="container-header" x="668" y="126" width="210.7" height="30" fill="none" stroke="none"/>
+  </g>
+  <path id="a5-graph" data-graph-role="edge" data-edge-id="a5-graph" data-source="twin" data-target="loadpath" data-edge-kind="flow" data-topic-id="" data-flow="control" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="1" data-route-stretch="1.0" data-bridges="" d="M 797,300 L 797,196 L 944,196" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="a7-lpci" data-graph-role="edge" data-edge-id="a7-lpci" data-source="loadpath" data-target="severity" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="2" data-route-stretch="1.171" data-bridges="" d="M 1156,196 L 1168,196 L 1180,196 L 1180,476 L 1168,476 L 1156,476" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="b3-feedback" data-graph-role="edge" data-edge-id="b3-feedback" data-source="writeback" data-target="model" data-edge-kind="flow" data-topic-id="" data-flow="feedback" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="2" data-route-stretch="1.2" data-bridges="" d="M 90,476 L 62,476 L 62,196 L 90,196" fill="none" stroke="#9ca3af" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowF)"/>
+  <path id="a1-read" data-graph-role="edge" data-edge-id="a1-read" data-source="model" data-target="extractor" data-edge-kind="flow" data-topic-id="" data-flow="read" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 225,232 L 225,300" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="a2-push" data-graph-role="edge" data-edge-id="a2-push" data-source="extractor" data-target="inbox" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 360,336 L 462,336" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="a3-apply" data-graph-role="edge" data-edge-id="a3-apply" data-source="inbox" data-target="twin" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 598,336 L 684,336" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="a4-detect" data-graph-role="edge" data-edge-id="a4-detect" data-source="twin" data-target="clash" data-edge-kind="flow" data-topic-id="" data-flow="control" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 910,336 L 944,336" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="a6-clashes" data-graph-role="edge" data-edge-id="a6-clashes" data-source="clash" data-target="severity" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 1050,372 L 1050,440" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="b1-publish" data-graph-role="edge" data-edge-id="b1-publish" data-source="severity" data-target="outbox" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 944,476 L 598,476" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="b2-read" data-graph-role="edge" data-edge-id="b2-read" data-source="outbox" data-target="writeback" data-edge-kind="flow" data-topic-id="" data-flow="read" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 462,476 L 360,476" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <g id="node-model" data-graph-role="node" data-node-id="model" data-semantic-role="double_rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="90,160,360,232">
+  <rect x="90.0" y="160.0" width="270.0" height="72.0" rx="4.0" fill="#ffffff" stroke="#e5e7eb" stroke-width="2.0"/>
+  <rect x="96.0" y="166.0" width="258.0" height="60.0" rx="4" fill="none" stroke="#e5e7eb" stroke-width="1.2" opacity="0.65"/>
+  <text x="225.0" y="178.0" text-anchor="middle" class="node-type">AUTHORING MODEL</text>
+  <text data-text-role="title" data-full-text="Federated Revit model" data-text-max-width="238.0" x="225.0" y="202.0" text-anchor="middle" class="node-title" font-size="18">Federated Revit model</text>
+  <text data-text-role="subtitle" data-full-text="structural host + MEP links" data-text-max-width="238.0" x="225.0" y="224.0" text-anchor="middle" class="node-sub" font-size="12">structural host + MEP links</text>
+  </g>
+  <g id="node-extractor" data-graph-role="node" data-node-id="extractor" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="90,300,360,372">
+  <rect x="90.0" y="300.0" width="270.0" height="72.0" rx="4.0" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.8"/>
+  <text x="225.0" y="318.0" text-anchor="middle" class="node-type">REVIT API</text>
+  <text data-text-role="title" data-full-text="Extractor + change hook" data-text-max-width="246.0" x="225.0" y="342.0" text-anchor="middle" class="node-title" font-size="17.96">Extractor + change hook</text>
+  <text data-text-role="subtitle" data-full-text="geometry · attributes · joins" data-text-max-width="246.0" x="225.0" y="364.0" text-anchor="middle" class="node-sub" font-size="12">geometry · attributes · joins</text>
+  </g>
+  <g id="node-writeback" data-graph-role="node" data-node-id="writeback" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="90,440,360,512">
+  <rect x="90.0" y="440.0" width="270.0" height="72.0" rx="4.0" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.8"/>
+  <text x="225.0" y="458.0" text-anchor="middle" class="node-type">WRITE-BACK</text>
+  <text data-text-role="title" data-full-text="Show Severity command" data-text-max-width="246.0" x="225.0" y="482.0" text-anchor="middle" class="node-title" font-size="18">Show Severity command</text>
+  <text data-text-role="subtitle" data-full-text="view overrides + markers" data-text-max-width="246.0" x="225.0" y="504.0" text-anchor="middle" class="node-sub" font-size="12">view overrides + markers</text>
+  </g>
+  <g id="node-inbox" data-graph-role="node" data-node-id="inbox" data-semantic-role="cylinder" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="462,304,598,368">
+  <ellipse cx="530.0" cy="312.0" rx="68.0" ry="8.0" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2.2"/>
+  <rect x="462.0" y="312.0" width="136.0" height="48.0" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2.2"/>
+  <ellipse cx="530.0" cy="360.0" rx="68.0" ry="8.0" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2.2"/>
+  <ellipse cx="530.0" cy="328.32" rx="68.0" ry="8.0" fill="none" stroke="#e5e7eb" stroke-opacity="0.45" stroke-width="1.2"/>
+  <ellipse cx="530.0" cy="342.4" rx="68.0" ry="8.0" fill="none" stroke="#e5e7eb" stroke-opacity="0.25" stroke-width="1.2"/>
+  <text data-text-role="title" data-full-text="Inbox" data-text-max-width="112.0" x="530.0" y="330.0" text-anchor="middle" class="node-title" font-size="18">Inbox</text>
+  <text data-text-role="subtitle" data-full-text="exports · deltas" data-text-max-width="112.0" x="530.0" y="354.0" text-anchor="middle" class="node-sub" font-size="12">exports · deltas</text>
+  </g>
+  <g id="node-outbox" data-graph-role="node" data-node-id="outbox" data-semantic-role="cylinder" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="462,444,598,508">
+  <ellipse cx="530.0" cy="452.0" rx="68.0" ry="8.0" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2.2"/>
+  <rect x="462.0" y="452.0" width="136.0" height="48.0" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2.2"/>
+  <ellipse cx="530.0" cy="500.0" rx="68.0" ry="8.0" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2.2"/>
+  <ellipse cx="530.0" cy="468.32" rx="68.0" ry="8.0" fill="none" stroke="#e5e7eb" stroke-opacity="0.45" stroke-width="1.2"/>
+  <ellipse cx="530.0" cy="482.4" rx="68.0" ry="8.0" fill="none" stroke="#e5e7eb" stroke-opacity="0.25" stroke-width="1.2"/>
+  <text data-text-role="title" data-full-text="Outbox" data-text-max-width="112.0" x="530.0" y="470.0" text-anchor="middle" class="node-title" font-size="18">Outbox</text>
+  <text data-text-role="subtitle" data-full-text="results" data-text-max-width="112.0" x="530.0" y="494.0" text-anchor="middle" class="node-sub" font-size="12">results</text>
+  </g>
+  <g id="node-twin" data-graph-role="node" data-node-id="twin" data-semantic-role="hexagon" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="684,300,910,372">
+  <path d="M 706.0 300.0 L 888.0 300.0 L 910.0 336.0 L 888.0 372.0 L 706.0 372.0 L 684.0 336.0 Z" fill="#ffffff" stroke="#3b82f6" stroke-width="1.6"/>
+  <text x="797.0" y="318.0" text-anchor="middle" class="node-type">DIGITAL TWIN</text>
+  <text data-text-role="title" data-full-text="Twin state" data-text-max-width="174.0" x="797.0" y="342.0" text-anchor="middle" class="node-title" font-size="18">Twin state</text>
+  <text data-text-role="subtitle" data-full-text="diff · incremental · SQLite" data-text-max-width="174.0" x="797.0" y="364.0" text-anchor="middle" class="node-sub" font-size="11.72">diff · incremental · SQLite</text>
+  </g>
+  <g id="node-loadpath" data-graph-role="node" data-node-id="loadpath" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="944,160,1156,232">
+  <rect x="944.0" y="160.0" width="212.0" height="72.0" rx="4.0" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.8"/>
+  <text x="1050.0" y="178.0" text-anchor="middle" class="node-type">STRUCTURE</text>
+  <text data-text-role="title" data-full-text="Load-path graph" data-text-max-width="188.0" x="1050.0" y="202.0" text-anchor="middle" class="node-title" font-size="18">Load-path graph</text>
+  <text data-text-role="subtitle" data-full-text="rules · tributary · dominators" data-text-max-width="188.0" x="1050.0" y="224.0" text-anchor="middle" class="node-sub" font-size="11.05">rules · tributary · dominators</text>
+  </g>
+  <g id="node-clash" data-graph-role="node" data-node-id="clash" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="944,300,1156,372">
+  <rect x="944.0" y="300.0" width="212.0" height="72.0" rx="4.0" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.8"/>
+  <text x="1050.0" y="318.0" text-anchor="middle" class="node-type">GEOMETRY</text>
+  <text data-text-role="title" data-full-text="Clash detection" data-text-max-width="188.0" x="1050.0" y="342.0" text-anchor="middle" class="node-title" font-size="18">Clash detection</text>
+  <text data-text-role="subtitle" data-full-text="R-tree · FCL · Manifold" data-text-max-width="188.0" x="1050.0" y="364.0" text-anchor="middle" class="node-sub" font-size="12">R-tree · FCL · Manifold</text>
+  </g>
+  <g id="node-severity" data-graph-role="node" data-node-id="severity" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="944,440,1156,512">
+  <rect x="944.0" y="440.0" width="212.0" height="72.0" rx="4.0" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.8"/>
+  <text x="1050.0" y="458.0" text-anchor="middle" class="node-type">CLASSIFICATION</text>
+  <text data-text-role="title" data-full-text="Severity" data-text-max-width="188.0" x="1050.0" y="482.0" text-anchor="middle" class="node-title" font-size="18">Severity</text>
+  <text data-text-role="subtitle" data-full-text="local impact × consequence" data-text-max-width="188.0" x="1050.0" y="504.0" text-anchor="middle" class="node-sub" font-size="12">local impact × consequence</text>
+  </g>
+  <g id="a1-read-label" data-graph-role="label" data-owner="a1-read" data-graph-bounds="154.24,252,222,272">
+  <rect x="154.24" y="252.0" width="67.75999999999999" height="20" rx="6" fill="#ffffff" opacity="0.96"/>
+  <text x="188.12" y="266.0" text-anchor="middle" class="arrow-label">Revit API</text>
+  </g>
+  <g id="a2-push-label" data-graph-role="label" data-owner="a2-push" data-graph-bounds="390.08,305,431.92,325">
+  <rect x="390.08" y="305.0" width="41.839999999999996" height="20" rx="6" fill="#ffffff" opacity="0.96"/>
+  <text x="411.0" y="319.0" text-anchor="middle" class="arrow-label">JSON</text>
+  </g>
+  <g id="a7-lpci-label" data-graph-role="label" data-owner="a7-lpci" data-graph-bounds="1170.28,326,1209,346">
+  <rect x="1170.28" y="326.0" width="38.72" height="20" rx="6" fill="#ffffff" opacity="0.96"/>
+  <text x="1189.64" y="340.0" text-anchor="middle" class="arrow-label">LPCI</text>
+  </g>
+  <g id="b3-feedback-label" data-graph-role="label" data-owner="b3-feedback" data-graph-bounds="10.52,382,91,402">
+  <rect x="10.52" y="382.0" width="80.48" height="20" rx="6" fill="#ffffff" opacity="0.96"/>
+  <text x="50.76" y="396.0" text-anchor="middle" class="arrow-label">write-back</text>
+  </g>
+  <g id="footer" data-graph-role="reserved" data-graph-bounds="48,566,664,582">
+  <text x="48.0" y="578.0" class="footnote">Revit → twin: document-changed deltas · twin → Revit: colour overrides and clash markers</text>
+  </g>
+</svg>

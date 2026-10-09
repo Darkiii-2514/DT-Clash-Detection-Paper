@@ -1,0 +1,24 @@
+# targeted round 2 — specific works the methods section relies on
+Holistic clash detection improvement using a component dependent network
+formalized knowledge representation spatial conflict coordination MEP systems
+identification of data items needed for automatic clash detection MEP design coordination
+construction with digital twin information systems
+automatic rule-based checking of building designs
+classification of rules for automated BIM rule checking development
+FCL general purpose library for collision and proximity queries
+fast algorithm for finding dominators in a flowgraph
+simple fast dominance algorithm
+OBBTree hierarchical structure for rapid interference detection
+unified approach to interpreting model predictions
+XGBoost scalable tree boosting system
+approaches to measures of structural robustness
+disproportionate collapse terminology procedures
+alternate load path progressive collapse analysis building
+load transfer path index structural engineering
+concrete beams with openings analysis design
+web openings steel composite beams design guide
+punching shear slab opening near column
+BIM-based structural analysis model generation automatic
+digital twin structural health monitoring BIM integration framework
+real-time synchronization BIM model change detection incremental
+graph theory structural system topology building robustness
