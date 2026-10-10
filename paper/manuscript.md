@@ -1,9 +1,9 @@
 ---
 title: "A Digital Twin-Enabled Framework for Automated Structural Clash Detection and Load Path-Aware Severity Classification in BIM Using Python and Revit API"
 author:
-  - 'Maleeha Waseem^a,\*^, Muhammad Arham^a^, Muhammed Ahmed^a^'
+  - 'Maleeha Waseem^a,\*^, Muhammad Arham^a^, Muhammad Ahmed^a^'
   - '^a^ Department of Civil Engineering, Ghulam Ishaq Khan Institute of Engineering Sciences and Technology, Topi 23640, Swabi, Khyber Pakhtunkhwa, Pakistan'
-  - '^\*^ Corresponding author. E-mail addresses: maleehawaseem30@gmail.com (M. Waseem), muhammadarham6333@gmail.com (M. Arham), muhammed.ahmed0999@gmail.com (M. Ahmed).'
+  - '^\*^ Corresponding author. E-mail addresses: maleehawaseem30@gmail.com (Maleeha Waseem), muhammadarham6333@gmail.com (Muhammad Arham), muhammed.ahmed0999@gmail.com (Muhammad Ahmed).'
 bibliography: refs.bib
 csl: style/elsevier-with-titles.csl
 link-citations: true
@@ -300,7 +300,7 @@ Calibrating and validating the severity model with expert ratings, using the rel
 
 # Declarations {.unnumbered}
 
-**CRediT authorship contribution statement.** **Maleeha Waseem:** Conceptualization, Methodology, Visualization, Writing – original draft, Writing – review & editing. **Muhammad Arham:** Data curation, Formal analysis, Validation, Writing – review & editing. **Muhammed Ahmed:** Conceptualization, Software, Investigation, Resources, Project administration, Writing – review & editing.
+**CRediT authorship contribution statement.** **Maleeha Waseem:** Conceptualization, Methodology, Visualization, Writing – original draft, Writing – review & editing. **Muhammad Arham:** Data curation, Formal analysis, Validation, Writing – review & editing. **Muhammad Ahmed:** Conceptualization, Software, Investigation, Resources, Project administration, Writing – review & editing.
 
 **Funding.** This research did not receive any specific grant from funding agencies in the public, commercial, or not-for-profit sectors.
 

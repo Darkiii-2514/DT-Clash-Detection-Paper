@@ -2,7 +2,7 @@
 
 Code, experiments and manuscript for *"A Digital Twin-Enabled Framework for Automated Structural Clash Detection and Load Path-Aware Severity Classification in BIM Using Python and Revit API"*.
 
-**Authors:** Maleeha Waseem (corresponding, maleehawaseem30@gmail.com), Muhammad Arham, Muhammed Ahmed
+**Authors:** Maleeha Waseem (corresponding, maleehawaseem30@gmail.com), Muhammad Arham, Muhammad Ahmed
 
 **Status:** manuscript in preparation for *Automation in Construction*; not yet peer-reviewed. The severity classes have **not yet been validated against expert judgement** (see [Expert validation kit](#expert-validation-kit)).
 
