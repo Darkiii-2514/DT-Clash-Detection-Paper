@@ -2,7 +2,8 @@
 
     .venv\\Scripts\\python experiments\\figures.py
 
-Writes paper/figures/fig2..fig7 (PNG, 600 dpi) sized for Elsevier columns (90 / 190 mm).
+Writes paper/figures/fig2..fig8 as PNG (600 dpi, for the manuscript) and vector PDF (fonts
+embedded, for journal artwork upload), sized for Elsevier columns (90 / 190 mm).
 Colour use follows one rule per job: severity classes are ORDINAL (one blue ramp, light -> dark,
 Coordination in neutral grey); methods / cases are CATEGORICAL in a fixed slot order.
 """
@@ -42,7 +43,7 @@ plt.rcParams.update({
     "xtick.color": MUTED, "ytick.color": MUTED, "axes.titlecolor": INK, "axes.grid": True,
     "grid.color": GRID, "grid.linewidth": 0.5, "axes.axisbelow": True, "axes.spines.top": False,
     "axes.spines.right": False, "figure.facecolor": SURF, "axes.facecolor": SURF, "savefig.dpi": 600,
-    "legend.frameon": False,
+    "legend.frameon": False, "pdf.fonttype": 42,
 })
 
 
@@ -58,6 +59,7 @@ def cases():
 def save(fig, name):
     OUT.mkdir(parents=True, exist_ok=True)
     fig.savefig(OUT / name, bbox_inches="tight", pad_inches=0.02)
+    fig.savefig((OUT / name).with_suffix(".pdf"), bbox_inches="tight", pad_inches=0.02)
     plt.close(fig)
     print("->", OUT / name)
 
