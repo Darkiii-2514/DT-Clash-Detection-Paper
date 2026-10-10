@@ -16,7 +16,7 @@ import numpy as np
 import trimesh
 from rtree import index
 
-from .model import Element, Model
+from .model import Element, Model, inside
 
 VOL_EPS = 1e-6        # m^3 (1 cm^3): below this an intersection is a touch, not a hard clash
 
@@ -112,18 +112,6 @@ def _axis(e: Element):
     return e.frame.u
 
 
-class _seeded:
-    """trimesh resolves inside/outside tests on open meshes with random rays: fix the seed
-    locally so results are reproducible, without disturbing global random state."""
-
-    def __enter__(self):
-        self.state = np.random.get_state()
-        np.random.seed(12345)
-
-    def __exit__(self, *exc):
-        np.random.set_state(self.state)
-
-
 def _boxes_overlap(a: trimesh.Trimesh, b: trimesh.Trimesh, pad=0.0) -> bool:
     return bool(np.all(a.bounds[0] - pad <= b.bounds[1]) and np.all(b.bounds[0] - pad <= a.bounds[1]))
 
@@ -134,39 +122,40 @@ def _contains(s: Element, m: Element) -> bool:
     hi = np.minimum(s.bbox[3:], m.bbox[3:])
     if np.any(hi < lo):
         return False
-    with _seeded():
-        for a, b in ((s, m), (m, s)):
-            for pa in a.parts:
-                for pb in b.parts:
-                    if not _boxes_overlap(pa, pb):
-                        continue
-                    v = pb.vertices
-                    inb = np.all((v >= pa.bounds[0]) & (v <= pa.bounds[1]), axis=1)
-                    if not inb.any():
-                        continue
-                    probe = np.vstack([v[inb][:4], pb.centroid])
-                    if pa.contains(probe).any():
-                        return True
+    for a, b in ((s, m), (m, s)):
+        for pa in a.solid_parts:
+            for pb in b.solid_parts:
+                if not _boxes_overlap(pa, pb):
+                    continue
+                v = pb.vertices
+                inb = np.all((v >= pa.bounds[0]) & (v <= pa.bounds[1]), axis=1)
+                if not inb.any():
+                    continue
+                probe = np.vstack([v[inb][:4], pb.centroid])
+                if inside(pa, probe).any():
+                    return True
     return False
 
 
 def _intersection_points(s: Element, m: Element, n_grid=14):
     """Points describing the intersection solid + its volume. Returns (pts, vol, method).
-    Exact (Manifold) Boolean, applied component-wise when an element is made of several
-    closed solids; deterministic point sampling only if a component is not closed."""
+    Exact (Manifold) Boolean, component-wise for multi-solid families; open components are
+    represented by their convex hulls ("+hull"). Deterministic point sampling is only a last
+    resort if the Boolean itself fails."""
     try:
-        if s.parts_watertight and m.parts_watertight:
-            pts, vol = [], 0.0
-            for ps in s.parts:
-                for pm in m.parts:
-                    if not _boxes_overlap(ps, pm):
-                        continue
-                    inter = trimesh.boolean.intersection([ps, pm], engine="manifold")
-                    if inter is not None and len(inter.vertices):
-                        pts.append(np.asarray(inter.vertices))
-                        vol += float(abs(inter.volume))
-            method = "manifold" if len(s.parts) == 1 and len(m.parts) == 1 else "manifold-parts"
-            return (np.vstack(pts) if pts else np.empty((0, 3))), vol, method
+        pts, vol = [], 0.0
+        for ps in s.solid_parts:
+            for pm in m.solid_parts:
+                if not _boxes_overlap(ps, pm):
+                    continue
+                inter = trimesh.boolean.intersection([ps, pm], engine="manifold")
+                if inter is not None and len(inter.vertices):
+                    pts.append(np.asarray(inter.vertices))
+                    vol += float(abs(inter.volume))
+        method = "manifold" if len(s.parts) == 1 and len(m.parts) == 1 else "manifold-parts"
+        if s.has_open_parts or m.has_open_parts:
+            method += "+hull"
+        return (np.vstack(pts) if pts else np.empty((0, 3))), vol, method
     except Exception:
         pass
     # fallback: sample the overlap of the two boxes and keep points inside both meshes
@@ -176,10 +165,9 @@ def _intersection_points(s: Element, m: Element, n_grid=14):
         return np.empty((0, 3)), 0.0, "sampled"
     g = [np.linspace(lo[k], hi[k], n_grid) for k in range(3)]
     pts = np.stack(np.meshgrid(*g, indexing="ij"), -1).reshape(-1, 3)
-    with _seeded():
-        inside = s.mesh.contains(pts) & m.mesh.contains(pts)
-    vol = float(np.prod(hi - lo) * inside.mean())
-    return pts[inside], vol, "sampled"
+    hit = inside(s.mesh, pts) & inside(m.mesh, pts)
+    vol = float(np.prod(hi - lo) * hit.mean())
+    return pts[hit], vol, "sampled"
 
 
 class ClashDetector:

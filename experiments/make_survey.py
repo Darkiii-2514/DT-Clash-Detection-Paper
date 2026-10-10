@@ -47,16 +47,23 @@ def load_cases():
 
 
 def sample(df, n, rng):
+    """Stratified so that agreement statistics are not dominated by one class: ~40 % clashes the
+    proposed method rates Critical/Major, ~30 % that geometry-only triage rates Critical/Major but
+    the proposed method does not, ~30 % others (mostly Minor/Negligible for both)."""
     df = df.reset_index(drop=True)
-    picked = list(df.index[df.sev_proposed.isin(["Critical", "Major"])])
-    disagree = list(df.index[(~df.index.isin(picked)) & df.sev_geometry.isin(["Critical", "Major"])])
-    rest = list(df.index[~df.index.isin(picked) & ~df.index.isin(disagree)])
-    rng.shuffle(disagree)
-    rng.shuffle(rest)
-    k_dis = max(0, min(len(disagree), (n - len(picked)) // 2))
-    picked += disagree[:k_dis]
+    cm = ["Critical", "Major"]
+    pos = list(df.index[df.sev_proposed.isin(cm)])
+    dis = list(df.index[~df.sev_proposed.isin(cm) & df.sev_geometry.isin(cm)])
+    rest = list(df.index[~df.sev_proposed.isin(cm) & ~df.sev_geometry.isin(cm)])
+    for lst in (pos, dis, rest):
+        rng.shuffle(lst)
+    q_pos = min(len(pos), round(0.4 * n))
+    q_dis = min(len(dis), round(0.3 * n))
+    picked = pos[:q_pos] + dis[:q_dis]
     picked += rest[: max(0, n - len(picked))]
-    picked = picked[:n] if len(picked) > n else picked
+    if len(picked) < n:          # top up from whatever stratum still has items
+        left = [i for i in pos + dis if i not in picked]
+        picked += left[: n - len(picked)]
     out = df.loc[picked].copy()
     return out.sample(frac=1, random_state=rng.randint(0, 10**6)).reset_index(drop=True)
 
@@ -163,11 +170,10 @@ _DREF = {}
 
 
 def model_dref(case):
-    """D_ref (median beam load) of a case, from its members table."""
+    """D_ref (typical bay load) of a case, as recorded by run_case in summary.json."""
     if case not in _DREF:
-        mem = pd.read_csv(ROOT / "results" / case / "members.csv")
-        b = mem[(mem.kind == "beam") & (mem.carried_kN > 0)].carried_kN
-        _DREF[case] = float(b.median()) if len(b) else float(mem.carried_kN.median())
+        s = json.loads((ROOT / "results" / case / "summary.json").read_text())
+        _DREF[case] = float(s["graph"]["D_ref_kN"])
     return _DREF[case]
 
 

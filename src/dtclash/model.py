@@ -103,6 +103,28 @@ class Element:
         return all(p.is_watertight for p in self.parts)
 
     @cached_property
+    def solid_parts(self) -> list[trimesh.Trimesh]:
+        """Closed solids for Booleans: watertight components as they are, open components
+        (whose inside is undefined) replaced by their convex hull - a deterministic,
+        slightly conservative stand-in. Degenerate (flat) open components are dropped."""
+        out = []
+        for p in self.parts:
+            if p.is_watertight:
+                out.append(p)
+                continue
+            try:
+                h = p.convex_hull
+            except Exception:
+                continue
+            if h.is_watertight and abs(float(h.volume)) > 1e-9:
+                out.append(h)
+        return out
+
+    @property
+    def has_open_parts(self) -> bool:
+        return not self.parts_watertight
+
+    @cached_property
     def frame(self) -> Frame:
         return _frame(self)
 
@@ -123,6 +145,24 @@ class Element:
             return max(p["width"], p["height"]) + ins
         f = self.frame
         return max(f.width, f.depth)
+
+
+_RAY_DIRS = np.array([[0.4395064455, 0.617598629942, 0.652231566745],
+                      [-0.7071067812, 0.0, 0.7071067812],
+                      [0.0, -0.8320502943, -0.5547001962]])
+
+
+def inside(mesh: trimesh.Trimesh, pts) -> np.ndarray:
+    """Deterministic point-in-mesh test: ray-crossing parity along three fixed directions,
+    majority vote. trimesh's contains() resolves open meshes with unseeded random rays, which
+    made results differ run to run; this test gives the same answer every time."""
+    pts = np.atleast_2d(np.asarray(pts, float))
+    votes = np.zeros(len(pts), int)
+    for d in _RAY_DIRS:
+        dirs = np.tile(d / np.linalg.norm(d), (len(pts), 1))
+        _, ray_idx = mesh.ray.intersects_id(pts, dirs, multiple_hits=True)
+        votes += (np.bincount(ray_idx, minlength=len(pts)) % 2).astype(int)
+    return votes >= 2
 
 
 def _unit(v):

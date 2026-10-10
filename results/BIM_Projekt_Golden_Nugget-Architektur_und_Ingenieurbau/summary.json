@@ -1,0 +1,83 @@
+{
+ "case": "BIM_Projekt_Golden_Nugget-Architektur_und_Ingenieurbau",
+ "n_structural": 637,
+ "n_mep": 5297,
+ "struct_kinds": {
+  "wall": 102,
+  "foundation": 15,
+  "slab": 45,
+  "column": 139,
+  "beam": 277,
+  "brace": 59
+ },
+ "mep_kinds": {
+  "equipment": 169,
+  "pipe": 2388,
+  "fitting": 2198,
+  "accessory": 251,
+  "tray": 12,
+  "duct": 279
+ },
+ "clash_kinds": {
+  "hard": 338,
+  "clearance": 715,
+  "touch": 31
+ },
+ "severity_proposed": {
+  "Negligible": 222,
+  "Coordination": 715,
+  "Minor": 132,
+  "Major": 15
+ },
+ "severity_local_only": {
+  "Negligible": 275,
+  "Coordination": 715,
+  "Minor": 59,
+  "Major": 26,
+  "Critical": 9
+ },
+ "severity_geometry": {
+  "Critical": 49,
+  "Minor": 190,
+  "Coordination": 715,
+  "Major": 62,
+  "Negligible": 68
+ },
+ "severity_category": {
+  "Major": 201,
+  "Critical": 62,
+  "Coordination": 715,
+  "Negligible": 31,
+  "Minor": 75
+ },
+ "timing_s": {
+  "load": 4.869441400000142,
+  "broadphase_bruteforce": 0.25663189999977476,
+  "broadphase_rtree": 0.08494919999975536,
+  "broadphase_s": 0.0716563000005408,
+  "narrowphase_s": 46.082598199998756,
+  "n_struct": 637,
+  "n_mep": 5297,
+  "n_candidates": 3724,
+  "n_clashes": 1084,
+  "loadpath": 7.582031399999323,
+  "severity": 0.5962082000005466
+ },
+ "graph": {
+  "nodes": 638,
+  "edges": 1664,
+  "unsupported": 53,
+  "removed_cycle_edges": 19,
+  "total_factored_load_kN": 27359.519725279042,
+  "D_ref_kN": 45.69151574400004,
+  "D_ref_source": "slab-to-support load",
+  "D_max_kN": 10249.770354630116,
+  "contact_pairs": 2158
+ },
+ "params": {
+  "export_dir": "data/raw/BIM_Projekt_Golden_Nugget-Architektur_und_Ingenieurbau",
+  "clearance": 0.025,
+  "alpha": 0.3,
+  "beta": 2.0
+ }
+}

@@ -7,7 +7,7 @@ import numpy as np
 
 from .model import Element
 
-_CACHED = ("mesh", "frame", "parts")
+_CACHED = ("mesh", "frame", "parts", "solid_parts")
 
 
 def _fresh(e: Element, verts: np.ndarray, **changes) -> Element:

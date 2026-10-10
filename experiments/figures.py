@@ -157,7 +157,7 @@ def fig_loadpath():
         ax2.plot([pos[i] - 0.3, pos[i] + 0.3], [q[1]] * 2, color=INK, lw=1.2)
         ax2.plot([pos[i]] * 2, [q[0], q[2]], color=INK, lw=0.8)
     ax2.axhline(lp.D_ref, color=CAT[1], lw=0.8, ls="--")
-    ax2.text(len(kinds) - 0.5, lp.D_ref * 1.25, f"D_ref = {lp.D_ref:.0f} kN (median beam)", ha="right",
+    ax2.text(len(kinds) - 0.5, lp.D_ref * 1.25, f"D_ref = {lp.D_ref:.0f} kN (typical bay)", ha="right",
              color=INK2, fontsize=6)
     ax2.set_yscale("log")
     ax2.set_xticks(pos, [f"{k}\n(n={len(dd)})" for k, dd in zip(kinds, data)])
@@ -233,31 +233,37 @@ def fig_crosstab():
 
 # ------------------------------------------------------------------ Fig. 6 sensitivity
 def fig_sensitivity():
-    name, d = cases()[0]
-    f = d / "sensitivity.csv"
-    if not f.exists():
+    cs = [(n, d) for n, d in cases() if (d / "sensitivity.csv").exists()]
+    if not cs:
         print("no sensitivity.csv; skipped")
         return
-    s = pd.read_csv(f)
-    s = s[s.param != "reference"].copy()
     nice = {"eta_scale": "Impact thresholds ×", "bays_scale": "Consequence thresholds ×", "alpha": "α (orphan weight)",
             "beta": "β (score weight)", "ll": "Live load (kPa)", "sdl": "Superimposed dead load (kPa)",
             "tol": "Contact tolerance (m)", "end_tol": "End tolerance (m)"}
-    s["label"] = [(f"{nice[p]} {v:g}" if p.endswith("scale") else f"{nice[p]} = {v:g}") for p, v in zip(s.param, s.value)]
-    fig, axes = plt.subplots(1, 3, figsize=(W2, 80 * MM), sharey=True)
-    y = np.arange(len(s))
+    frames = []
+    for ci, (name, d) in enumerate(cs):
+        s = pd.read_csv(d / "sensitivity.csv")
+        s = s[s.param != "reference"].copy()
+        s["case"] = ci
+        frames.append(s)
+    base = frames[0]
+    labels = [(f"{nice[p]} {v:g}" if p.endswith("scale") else f"{nice[p]} = {v:g}") for p, v in zip(base.param, base.value)]
+    fig, axes = plt.subplots(1, 3, figsize=(W2, 88 * MM), sharey=True)
+    y = np.arange(len(base))
+    off = (np.arange(len(cs)) - (len(cs) - 1) / 2) * 0.22
     for ax, col, title in ((axes[0], "jaccard", "(a) Jaccard, Critical+Major set"),
                            (axes[1], "kappa_w", "(b) Weighted κ, 4 classes"),
                            (axes[2], "tau_top50", "(c) Kendall τ, top-50 ranking")):
-        ax.hlines(y, 0, s[col], color=GRID, lw=0.8)
-        ax.scatter(s[col], y, s=14, color=CAT[0], zorder=3, linewidths=0)
-        for yi, v in zip(y, s[col]):
-            ax.text(min(v, 1.0) + 0.02, yi, f"{v:.2f}", va="center", fontsize=5.8, color=INK2)
-        ax.set_xlim(0, 1.15)
+        ax.hlines(y, 0, 1, color=GRID, lw=0.6)
+        for ci, s in enumerate(frames):
+            ax.scatter(s[col].to_numpy(), y + off[ci], s=13, color=CAT[ci], zorder=3, linewidths=0,
+                       marker="o" if ci == 0 else "s", label=CASE_LABEL[cs[ci][0]])
+        ax.set_xlim(0, 1.05)
         ax.set_title(title, loc="left")
         ax.grid(axis="y", visible=False)
-    axes[0].set_yticks(y, s.label)
+    axes[0].set_yticks(y, labels)
     axes[0].invert_yaxis()
+    axes[0].legend(loc="lower left", fontsize=6)
     fig.subplots_adjust(wspace=0.08)
     save(fig, "fig7_sensitivity.png")
 
@@ -273,6 +279,7 @@ def fig_twin():
             "struct_move": "Beam move", "struct_delete": "Beam delete"}
     fig, ax = plt.subplots(figsize=(W2 * 0.62, 62 * MM))
     width = 0.8 / len(cs)
+    fulls = []
     for ci, (name, d) in enumerate(cs):
         b = pd.read_csv(d / "twin_bench.csv")
         summ = json.loads((d / "twin_bench_summary.json").read_text())
@@ -287,15 +294,17 @@ def fig_twin():
         full = summ.get("full_recompute_ms_mean")
         if full:
             ax.axhline(full, color=CAT[ci], lw=0.8, ls="--")
-            ax.text(len(order) - 0.45, full * 1.15, f"full recompute, {CASE_LABEL[name]} ({full / 1000:.0f} s)",
-                    ha="right", fontsize=6, color=INK2)
+            fulls.append(f"{full / 1000:.0f} s ({CASE_LABEL[name]})")
+    if fulls:   # one label for the (near-coincident) full-recompute lines
+        ax.text(len(order) - 0.45, max(ax.get_ylim()[1] * 0.5, 1.0), "full recomputation: " + ", ".join(fulls),
+                ha="right", va="top", fontsize=6, color=INK2)
     ax.set_yscale("log")
     ax.set_xticks(range(len(order)), [nice[t] for t in order])
     ax.set_ylabel("Incremental update latency (ms, log scale)")
     ax.grid(axis="x", visible=False)
     if len(cs) > 1:
-        ax.legend([plt.Line2D([], [], marker="o", ls="", color=CAT[i]) for i in range(len(cs))],
-                  [CASE_LABEL[n] for n, _ in cs], loc="upper left")
+        ax.legend([plt.Line2D([], [], marker="o", ls="", ms=4, color=CAT[i]) for i in range(len(cs))],
+                  [CASE_LABEL[n] for n, _ in cs], loc="center left", bbox_to_anchor=(0.0, 0.55))
     save(fig, "fig8_twin_latency.png")
 
 

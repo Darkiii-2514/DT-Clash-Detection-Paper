@@ -14,7 +14,7 @@ The form never shows any method's classification, so the raters are blind to it.
 
 1. **Raters:** 3–5 practising structural engineers, or structural academics with design experience. More raters give a more reliable consensus. Record each rater's role and years of experience on the *Instructions* sheet.
 2. **Ethics:** check whether your university needs ethics or IRB approval for an expert survey. Many do not for anonymous professional judgement, but some do. Get each rater's consent to use their anonymised ratings.
-3. Send each rater a **copy** of the form. Ask them to work independently and not to discuss items until all forms are returned. Expect about 30–45 minutes for 40 items.
+3. Send each rater a **copy** of the form. Ask them to work independently and not to discuss items until all forms are returned. Expect about 40–60 minutes for the 48 items.
 4. Save the returned forms as `survey/returned/<rater-id>.xlsx`.
 5. Run the analysis:
 

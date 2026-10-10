@@ -23,9 +23,9 @@
   "touch": 17
  },
  "severity_proposed": {
-  "Negligible": 591,
-  "Major": 10,
-  "Minor": 102,
+  "Negligible": 589,
+  "Major": 11,
+  "Minor": 103,
   "Coordination": 592,
   "Critical": 1
  },
@@ -51,24 +51,28 @@
   "Critical": 4
  },
  "timing_s": {
-  "load": 3.5865849000401795,
-  "broadphase_bruteforce": 0.5825195000506938,
-  "broadphase_rtree": 0.09106280002743006,
-  "broadphase_s": 0.09668930002953857,
-  "narrowphase_s": 9.684508500038646,
+  "load": 5.178327399999034,
+  "broadphase_bruteforce": 0.8224879999997938,
+  "broadphase_rtree": 0.1640028000001621,
+  "broadphase_s": 0.1959292000010464,
+  "narrowphase_s": 16.974870699999883,
   "n_struct": 1185,
   "n_mep": 9129,
   "n_candidates": 2040,
   "n_clashes": 1296,
-  "loadpath": 8.251311699976213,
-  "severity": 2.997282600030303
+  "loadpath": 16.648974100000487,
+  "severity": 5.443209600000046
  },
  "graph": {
   "nodes": 1186,
   "edges": 3432,
-  "unsupported": 21,
+  "unsupported": 18,
   "removed_cycle_edges": 1,
-  "total_factored_load_kN": 114215.21006589034
+  "total_factored_load_kN": 114217.46277789034,
+  "D_ref_kN": 50.97107791122908,
+  "D_ref_source": "slab-to-support load",
+  "D_max_kN": 14093.96430089227,
+  "contact_pairs": 4059
  },
  "params": {
   "export_dir": "data/raw/Snowdon_Towers_Sample_Structural",

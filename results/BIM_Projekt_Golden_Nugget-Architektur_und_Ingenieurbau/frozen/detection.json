@@ -1,0 +1,80 @@
+{
+ "reference_pairs": 357,
+ "detected_physical": 369,
+ "detected_hard": 336,
+ "tp": 355,
+ "fp": 14,
+ "fn": 2,
+ "precision": 0.962059620596206,
+ "recall": 0.9943977591036415,
+ "f1": 0.977961432506887,
+ "hard_only_recall": 0.9355742296918768,
+ "fp_pairs": [
+  [
+   "BIM_Projekt_Golden_Nugget-Architektur_und_Ingenieurbau:361b8fef-f109-4015-a99a-e8383f9c8759-0021a18c",
+   "BIM_Projekt_Golden_Nugget-Gebaeudetechnik:22dfbbfe-4fe4-4bc1-ad1e-2d52148774ce-0031d8c3"
+  ],
+  [
+   "BIM_Projekt_Golden_Nugget-Architektur_und_Ingenieurbau:361b8fef-f109-4015-a99a-e8383f9c8759-0021a18c",
+   "BIM_Projekt_Golden_Nugget-Gebaeudetechnik:b727c187-f65f-4586-9e86-14698f46ca3b-00318af0"
+  ],
+  [
+   "BIM_Projekt_Golden_Nugget-Architektur_und_Ingenieurbau:361b8fef-f109-4015-a99a-e8383f9c8759-0021a5eb",
+   "BIM_Projekt_Golden_Nugget-Gebaeudetechnik:97610d2d-596b-410b-87c7-9b4fc8f63d85-00357937"
+  ],
+  [
+   "BIM_Projekt_Golden_Nugget-Architektur_und_Ingenieurbau:361b8fef-f109-4015-a99a-e8383f9c8759-0021a5eb",
+   "BIM_Projekt_Golden_Nugget-Gebaeudetechnik:97610d2d-596b-410b-87c7-9b4fc8f63d85-00357939"
+  ],
+  [
+   "BIM_Projekt_Golden_Nugget-Architektur_und_Ingenieurbau:57a2a2be-aa07-44ae-aab9-2163e4a828ac-001b3c63",
+   "BIM_Projekt_Golden_Nugget-Gebaeudetechnik:870e077d-411d-47d4-a648-448dde90dfcc-002fe2b3"
+  ],
+  [
+   "BIM_Projekt_Golden_Nugget-Architektur_und_Ingenieurbau:57a2a2be-aa07-44ae-aab9-2163e4a828ac-001b3c63",
+   "BIM_Projekt_Golden_Nugget-Gebaeudetechnik:870e077d-411d-47d4-a648-448dde90dfcc-002fe452"
+  ],
+  [
+   "BIM_Projekt_Golden_Nugget-Architektur_und_Ingenieurbau:b08ac03f-685b-4d59-8b74-f1fca2b8b48f-00106664",
+   "BIM_Projekt_Golden_Nugget-Gebaeudetechnik:234056c2-a427-4f74-a4dd-f49b90c56a95-0045efcf"
+  ],
+  [
+   "BIM_Projekt_Golden_Nugget-Architektur_und_Ingenieurbau:b08ac03f-685b-4d59-8b74-f1fca2b8b48f-00106664",
+   "BIM_Projekt_Golden_Nugget-Gebaeudetechnik:e88074bd-49d3-48e8-840f-fefbf5ffd1ed-00450aa3"
+  ],
+  [
+   "BIM_Projekt_Golden_Nugget-Architektur_und_Ingenieurbau:f99ef1ce-86a9-4194-b367-5c32bb243ed6-0011c6ed",
+   "BIM_Projekt_Golden_Nugget-Gebaeudetechnik:622de5ed-f7d8-4b2d-b501-ca65a50cc05b-003680df"
+  ],
+  [
+   "BIM_Projekt_Golden_Nugget-Architektur_und_Ingenieurbau:f99ef1ce-86a9-4194-b367-5c32bb243ed6-0011c78d",
+   "BIM_Projekt_Golden_Nugget-Gebaeudetechnik:31a0a58a-b52f-4314-a517-eb6647bc8b8e-00372410"
+  ],
+  [
+   "BIM_Projekt_Golden_Nugget-Architektur_und_Ingenieurbau:f99ef1ce-86a9-4194-b367-5c32bb243ed6-0011c78d",
+   "BIM_Projekt_Golden_Nugget-Gebaeudetechnik:6d762914-6ba1-453a-acaa-135f7aa5cd29-0036ea61"
+  ],
+  [
+   "BIM_Projekt_Golden_Nugget-Architektur_und_Ingenieurbau:f99ef1ce-86a9-4194-b367-5c32bb243ed6-0011c78d",
+   "BIM_Projekt_Golden_Nugget-Gebaeudetechnik:908751f8-7ce6-4fd3-9d6f-41dce6dc3a8b-00485c4b"
+  ],
+  [
+   "BIM_Projekt_Golden_Nugget-Architektur_und_Ingenieurbau:f99ef1ce-86a9-4194-b367-5c32bb243ed6-0011c78d",
+   "BIM_Projekt_Golden_Nugget-Gebaeudetechnik:c60cfcf2-77da-4a9e-95ed-4f895e3ea156-00478132"
+  ],
+  [
+   "BIM_Projekt_Golden_Nugget-Architektur_und_Ingenieurbau:f99ef1ce-86a9-4194-b367-5c32bb243ed6-0011c7df",
+   "BIM_Projekt_Golden_Nugget-Gebaeudetechnik:bf0ad108-dc1c-417e-8bac-71f427dd1a55-00347662"
+  ]
+ ],
+ "fn_pairs": [
+  [
+   "BIM_Projekt_Golden_Nugget-Architektur_und_Ingenieurbau:1cdbb014-26b1-47c1-8932-94eee37d4e93-00340a87",
+   "BIM_Projekt_Golden_Nugget-Gebaeudetechnik:1441d67b-9d2a-4145-a9ca-f1e3a5f982de-004832eb"
+  ],
+  [
+   "BIM_Projekt_Golden_Nugget-Architektur_und_Ingenieurbau:f99ef1ce-86a9-4194-b367-5c32bb243ed6-0011c940",
+   "BIM_Projekt_Golden_Nugget-Gebaeudetechnik:b1f26ac8-4a05-40ee-a32a-d5d33cf2a296-002c334b"
+  ]
+ ]
+}

@@ -13,6 +13,7 @@ def _moved(e, dxyz):
     e2.__dict__.pop("mesh", None)
     e2.__dict__.pop("frame", None)
     e2.__dict__.pop("parts", None)
+    e2.__dict__.pop("solid_parts", None)
     e2.verts = e.verts + np.asarray(dxyz)
     e2.bbox = e.bbox + np.r_[dxyz, dxyz]
     if e.location and e.location.get("kind") == "curve":

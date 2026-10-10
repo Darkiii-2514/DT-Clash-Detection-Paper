@@ -123,7 +123,9 @@ def main():
         "graph": {"nodes": lp.G.number_of_nodes(), "edges": lp.G.number_of_edges(),
                   "unsupported": len(lp.notes["unsupported"]),
                   "removed_cycle_edges": lp.notes["removed_cycle_edges"],
-                  "total_factored_load_kN": lp.total_load},
+                  "total_factored_load_kN": lp.total_load,
+                  "D_ref_kN": lp.D_ref, "D_ref_source": lp.D_ref_source, "D_max_kN": lp.D_max,
+                  "contact_pairs": lp.notes.get("contact_pairs")},
         "params": vars(a),
     }
     (out / "summary.json").write_text(json.dumps(summary, indent=1, default=str))

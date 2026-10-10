@@ -25,7 +25,7 @@ from .model import Element
 
 CLASSES = ["Negligible", "Minor", "Major", "Critical"]
 ETA_LEVELS = (0.05, 0.15, 0.35)          # L0 | L1 | L2 | L3
-# consequence levels in "bay-equivalents" (dependent load / D_ref, D_ref = median beam load):
+# consequence levels in "bay-equivalents" (dependent load / D_ref, D_ref = typical direct slab-to-support load):
 BAYS_D = (3.0, 15.0)                     # C1: < 3 bays | C2: 3-15 | C3: >= 15
 BAYS_E = (1.0, 5.0)                      # ... or orphaned (no alternate path) load >= 1 / 5 bays
 MATRIX = [  # rows: eta level L0..L3, cols: consequence C1..C3
@@ -160,8 +160,9 @@ def _beam(c: Clash, s: Element, m: Element):
     else:
         r, wfrac = ho / h, min(bh / b, 1.0)
         # rectangular hole (bh x ho) at offset y0: I_red/I = 1 - wfrac[(r^3) + 12 r (y0/h)^2]
+        # (concrete and timber; only concrete has longitudinal bars near the faces)
         lossM = float(np.clip(wfrac * (r ** 3 + 12 * r * (y0 / h) ** 2), 0, 1))
-        if (w0 < COVER or w1 > f.depth - COVER) and wfrac > 0.1:
+        if material_of(s) == "concrete" and (w0 < COVER or w1 > f.depth - COVER) and wfrac > 0.1:
             flags.append("reinforcement_zone")        # longitudinal bars likely severed
             lossM = max(lossM, 0.5 * wfrac)
         lossV = float(np.clip(wfrac * r * (1 + 0.5 * c.du / max(h, 1e-3)), 0, 1))

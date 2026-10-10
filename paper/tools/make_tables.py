@@ -36,34 +36,42 @@ def table3():
         s = json.loads((ROOT / "results" / key / "summary.json").read_text())
         sk = s["struct_kinds"]
         links = "; ".join(f"{short(x['tag'])} ({x['n_mep']:,})" for x in meta["sources"] if x["n_mep"])
-        rows.append(f"| {name} | {s['n_structural']:,} | {sk.get('beam', 0)} / {sk.get('column', 0)} / "
+        rows.append(f"| {name} | {s['n_structural']:,} | {sk.get('beam', 0)} / {sk.get('brace', 0)} / {sk.get('column', 0)} / "
                     f"{sk.get('wall', 0)} / {sk.get('slab', 0)} / {sk.get('foundation', 0)} | {s['n_mep']:,} | {links} |")
     head = ("Table: Case-study models (Revit 2027 sample files). Structural members are taken from the host "
             "(structural) model; MEP elements from the host and its links. {#tbl:models}\n\n"
-            "| Model | Structural members | Beams / columns / walls / slabs / foundations | MEP elements | MEP by source model |\n"
-            "|---|---:|---|---:|---|\n")
+            "| Model | Structural members | Beams / braces / columns / walls / slabs / foundations | MEP elements | MEP by source model |\n"
+            "|--------------|------:|------------------|------:|--------------------------------------|\n")
     return head + "\n".join(rows) + "\n"
 
 
 def table4():
-    rows = []
-    for key, name in available():
+    """Transposed (one column per model) so that nine quantities fit the page width."""
+    cases = available()
+    cols = []
+    for key, _ in cases:
         d = ROOT / "results" / key
         s = json.loads((d / "summary.json").read_text())
         det = json.loads((d / "detection.json").read_text())
         meta = json.loads((ROOT / "data" / "raw" / key / "meta.json").read_text())
         ck = Counter(s["clash_kinds"])
         t = s["timing_s"]
-        rows.append(f"| {name} | {t['n_candidates']:,} | {ck['hard']:,} | {ck['touch']:,} | {ck['clearance']:,} | "
-                    f"{det['reference_pairs']:,} | {det['tp']:,} / {det['fp']:,} / {det['fn']:,} | "
-                    f"{det['precision']:.3f} | {det['recall']:.3f} | {det['f1']:.3f} | "
-                    f"{t['broadphase_rtree'] + t['narrowphase_s']:.1f} | {meta.get('t_reference_s', float('nan')):.0f} |")
+        cols.append([f"{t['n_candidates']:,}",
+                     f"{ck['hard']:,} / {ck['touch']:,} / {ck['clearance']:,}",
+                     f"{det['reference_pairs']:,}",
+                     f"{det['tp']:,} / {det['fp']:,} / {det['fn']:,}",
+                     f"{det['precision']:.3f}", f"{det['recall']:.3f}", f"{det['f1']:.3f}",
+                     f"{t['broadphase_rtree'] + t['narrowphase_s']:.0f}",
+                     f"{meta.get('t_reference_s', float('nan')):.0f}"])
+    labels = ["Candidate pairs (broad phase)", "Clashes: hard / touch / clearance", "Revit reference pairs",
+              "TP / FP / FN", "Precision", "Recall", "F1", "Time, framework broad + narrow phase (s)",
+              "Time, Revit reference filter (s)"]
+    rows = [f"| {lab} | " + " | ".join(c[i] for c in cols) + " |" for i, lab in enumerate(labels)]
     head = ("Table: Clash detection compared with Revit's ElementIntersectsSolidFilter. Physical clashes = hard + "
-            "touch; TP/FP/FN are pairs agreed / found only by the framework / found only by Revit; times in seconds "
-            "(framework: broad + narrow phase; Revit: reference filter). {#tbl:detection}\n\n"
-            "| Model | Candidates | Hard | Touch | Clearance | Revit pairs | TP / FP / FN | Precision | Recall | F1 | "
-            "Time, framework (s) | Time, Revit (s) |\n"
-            "|---|---:|---:|---:|---:|---:|---|---:|---:|---:|---:|---:|\n")
+            "touch; TP / FP / FN are pairs agreed / found only by the framework / found only by Revit. "
+            "{#tbl:detection}\n\n"
+            "| Quantity | " + " | ".join(name for _, name in cases) + " |\n"
+            "|--------------------------------------|" + "|".join("--------------:" for _ in cases) + "|\n")
     return head + "\n".join(rows) + "\n"
 
 
@@ -82,17 +90,48 @@ def table5():
             rows.append(f"| {name} | {lab} | {c.get('Critical', 0)} | {c.get('Major', 0)} | {c.get('Minor', 0)} | "
                         f"{c.get('Negligible', 0)} | {len(cm)} ({100 * len(cm) / len(h):.1f} %) | "
                         f"{'—' if col == 'sev_proposed' else f'{kap:.2f}'} | {'—' if col == 'sev_proposed' else f'{jac:.2f}'} |")
-    head = ("Table: Severity of the hard clashes under the four classification methods. κ_w: quadratic-weighted "
+    head = ("Table: Severity of the hard clashes under the four classification methods. κ~w~: quadratic-weighted "
             "Cohen's kappa with the proposed classes; Jaccard: overlap of the Critical+Major sets with the proposed "
             "one. {#tbl:severity}\n\n"
-            "| Model | Method | Critical | Major | Minor | Negligible | Critical + Major | κ_w | Jaccard |\n"
-            "|---|---|---:|---:|---:|---:|---:|---:|---:|\n")
+            "| Model | Method | Critical | Major | Minor | Negligible | Critical + Major | κ~w~ | Jaccard |\n"
+            "|----------|------------------|---------:|-------:|-------:|-----------:|------------:|------:|--------:|\n")
+    return head + "\n".join(rows) + "\n"
+
+
+def table6():
+    """Held-out case: frozen method vs revised method (Golden Nugget)."""
+    key = "BIM_Projekt_Golden_Nugget-Architektur_und_Ingenieurbau"
+    d = ROOT / "results" / key
+    if not (d / "frozen" / "summary.json").exists():
+        return ""
+    rows = []
+    for label, sub in (("Frozen", d / "frozen"), ("Revised", d)):
+        s = json.loads((sub / "summary.json").read_text())
+        g = s["graph"]
+        if "D_ref_kN" in g:
+            dref = g["D_ref_kN"]
+        else:   # the frozen run predates storing D_ref: recompute its definition (median beam load)
+            mem = pd.read_csv(sub / "members.csv")
+            dref = float(mem[(mem.kind == "beam") & (mem.carried_kN > 0)].carried_kN.median())
+        h = pd.read_csv(sub / "clashes.csv")
+        h = h[h.kind == "hard"]
+        c = h.sev_proposed.value_counts()
+        cm = int(c.get("Critical", 0) + c.get("Major", 0))
+        rows.append(f"| {label} | {dref:.1f} | {g['unsupported']} ({100 * g['unsupported'] / s['n_structural']:.1f} %) | "
+                    f"{g['removed_cycle_edges']} | {c.get('Critical', 0)} / {c.get('Major', 0)} / {c.get('Minor', 0)} / "
+                    f"{c.get('Negligible', 0)} | {cm} ({100 * cm / len(h):.1f} %) |")
+    head = ("Table: Held-out case (Golden Nugget): load path and proposed severity of the hard clashes with the "
+            "frozen method (as developed on Snowdon Towers) and after revising the reference bay load and the "
+            "beam–column/brace rules (applied to both models). "
+            "{#tbl:heldout}\n\n"
+            "| Method | D~ref~ (kN) | Unsupported | Cycle edges removed | Crit. / Major / Minor / Negl. | "
+            "Crit. + Major |\n|--------|------:|-----------:|------:|--------------------|-----------:|\n")
     return head + "\n".join(rows) + "\n"
 
 
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
-    for name, f in (("table3", table3), ("table4", table4), ("table5", table5)):
+    for name, f in (("table3", table3), ("table4", table4), ("table5", table5), ("table6", table6)):
         (OUT / f"{name}.md").write_text(f(), encoding="utf-8")
         print("->", OUT / f"{name}.md")
 

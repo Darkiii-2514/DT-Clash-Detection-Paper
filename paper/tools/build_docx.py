@@ -155,6 +155,9 @@ def main():
     if a.rebuild_reference or not REF.exists():
         make_reference()
     out = PAPER / "manuscript.docx"
+    # regenerate tables from results, then number captions (regenerating drops the labels)
+    for tool in ("make_tables.py", "number_captions.py"):
+        subprocess.run([sys.executable, str(PAPER / "tools" / tool)], check=True, capture_output=True)
     # insert generated tables / blocks at their <!--NAME--> placeholders
     src = (PAPER / "manuscript.md").read_text(encoding="utf-8")
     for f in sorted((PAPER / "tables").glob("*.md")):

@@ -12,7 +12,8 @@ Per member i:
                          alternate path if i is lost (alternate-load-path idea, UFC 4-023-03)
   lam_i, rho_i         = D_i and (E_i + own_i) as fractions of the building total (reported)
   LPCI_i = (1-alpha) * g(D_i) + alpha * g(E_i),   g(x) = log(1 + x/D_ref) / log(1 + D_max/D_ref)
-         D_ref = median D of beams (a typical bay), D_max = largest D of any non-slab member.
+         D_ref = median load a member receives directly from a slab (a typical bay),
+         D_max = largest D of any non-slab member.
   The log scale keeps beams, columns and transfer members on one comparable axis.
 """
 from __future__ import annotations
@@ -24,7 +25,7 @@ import networkx as nx
 import numpy as np
 from rtree import index
 
-from .model import Element, Model
+from .model import Element, Model, inside
 
 GROUND = "__ground__"
 RANK = {"slab": 5, "brace": 4, "beam": 4, "wall": 2, "column": 2, "foundation": 1}
@@ -131,7 +132,7 @@ class LoadPathGraph:
                     if subset is not None and e.uid not in subset and f.uid not in subset:
                         continue
                     _, d, _ = trimesh.proximity.closest_point(f.mesh, pt[None])
-                    if d[0] <= self.end_tol or f.mesh.contains(pt[None])[0]:
+                    if d[0] <= self.end_tol or inside(f.mesh, pt[None])[0]:
                         pairs.add(tuple(sorted((e.uid, f.uid))))
         return pairs
 
@@ -155,12 +156,26 @@ class LoadPathGraph:
             if o.kind == "foundation":
                 return None
             return (o, f) if _zr(o)[1] >= _zr(f)[1] - t else None
+        if "brace" in (ka, kb):
+            # bracing is part of the lateral system: in the gravity load path it hangs on the
+            # members it connects to and never supports anything (avoids spurious cycles)
+            if ka == kb:
+                return None
+            return (a, b) if ka == "brace" else (b, a)
         if ka == kb == "beam":
             return self._beam_on_beam(a, b)
-        # beam framing into a column/wall: the beam END lands on it -> beam bears on it;
-        # a column/wall whose base sits within the beam span -> transfer (it bears on the beam)
+        # beam vs column/wall, decided by whether the vertical member continues BELOW the beam:
+        #  - it does  -> the beam frames into / bears on it;
+        #  - it starts within or above the beam's depth and rises above it -> it stands on the
+        #    beam (transfer). Robust to timber joinery, where tenons sink into sill beams.
+        # Only a vertical stub lying entirely within the beam depth falls back to end proximity.
         for bm, vt in ((a, b), (b, a)):
             if bm.kind in ("beam", "brace") and vt.kind in ("column", "wall") and bm.is_linear:
+                (bb0, bb1), (vv0, vv1) = _zr(bm), _zr(vt)
+                if vv0 < bb0 - t:
+                    return bm, vt
+                if vv1 > bb1 + t:
+                    return vt, bm
                 reach = max(vt.frame.width, vt.frame.depth, 0.3) / 2 + t + 0.15
                 ends = [np.asarray(bm.location[k]) for k in ("p0", "p1")]
                 if vt.kind == "column":
@@ -168,11 +183,7 @@ class LoadPathGraph:
                 else:
                     end_at = vt.is_linear and min(_seg_dist(e_, vt.location["p0"], vt.location["p1"])
                                                   for e_ in ends) < reach
-                if end_at:
-                    return bm, vt
-                if _zr(vt)[0] >= _zr(bm)[1] - t - 0.05:
-                    return vt, bm
-                return bm, vt
+                return (bm, vt) if end_at else (vt, bm)
         # a vertical element on a slab (transfer) or a slab on a column/wall
         for up, lo in ((a, b), (b, a)):
             if up.kind in ("column", "wall") and lo.kind == "slab":
@@ -371,9 +382,19 @@ class LoadPathGraph:
         for u in self.elems:
             sub = nx.descendants(dom_tree, u) if u in dom_tree else set()
             orphan[u] = sum(self.own.get(n, 0.0) for n in sub)
+        # bay unit D_ref: the load a member receives DIRECTLY from a slab it supports - a typical
+        # floor bay whether the slab bears on joists, beams, walls or columns (the median beam
+        # load used before assumed a beam-and-slab system and collapsed for flat-slab buildings)
+        direct = [self.carried[u] * d["share"] for u, v, d in G.edges(data=True)
+                  if v != GROUND and self.elems[u].kind == "slab" and d.get("share", 0) > 0]
         beams = [self.carried[u] for u, e in self.elems.items() if e.kind == "beam" and self.carried[u] > 0]
         non_slab = [self.carried[u] for u, e in self.elems.items() if e.kind != "slab"]
-        self.D_ref = float(np.median(beams)) if beams else float(np.median(list(self.carried.values())))
+        if len(direct) >= 5:
+            self.D_ref, self.D_ref_source = float(np.median(direct)), "slab-to-support load"
+        elif beams:
+            self.D_ref, self.D_ref_source = float(np.median(beams)), "beam load"
+        else:
+            self.D_ref, self.D_ref_source = float(np.median(list(self.carried.values()))), "member load"
         self.D_max = max(non_slab) if non_slab else max(self.carried.values())
         self.metrics = {}
         for u, e in self.elems.items():

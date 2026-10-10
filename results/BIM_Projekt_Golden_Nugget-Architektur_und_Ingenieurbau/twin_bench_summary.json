@@ -1,0 +1,73 @@
+{
+ "case": "BIM_Projekt_Golden_Nugget-Architektur_und_Ingenieurbau",
+ "initial_full_sync_ms": 59554.58870000075,
+ "n_events": 120,
+ "latency_ms_by_type": {
+  "mep_add": {
+   "count": 20.0,
+   "mean": 60.5,
+   "std": 89.1,
+   "min": 25.4,
+   "50%": 35.9,
+   "95%": 99.3,
+   "max": 433.2
+  },
+  "mep_delete": {
+   "count": 20.0,
+   "mean": 25.3,
+   "std": 11.4,
+   "min": 14.9,
+   "50%": 20.3,
+   "95%": 45.1,
+   "max": 55.0
+  },
+  "mep_move": {
+   "count": 20.0,
+   "mean": 53.9,
+   "std": 55.8,
+   "min": 25.0,
+   "50%": 40.9,
+   "95%": 86.8,
+   "max": 286.6
+  },
+  "mep_resize": {
+   "count": 20.0,
+   "mean": 56.6,
+   "std": 73.4,
+   "min": 27.4,
+   "50%": 39.9,
+   "95%": 68.1,
+   "max": 367.0
+  },
+  "struct_delete": {
+   "count": 20.0,
+   "mean": 2572.6,
+   "std": 278.8,
+   "min": 2268.2,
+   "50%": 2472.7,
+   "95%": 3069.6,
+   "max": 3387.5
+  },
+  "struct_move": {
+   "count": 20.0,
+   "mean": 2740.3,
+   "std": 567.0,
+   "min": 2235.8,
+   "50%": 2501.7,
+   "95%": 4048.2,
+   "max": 4071.4
+  }
+ },
+ "latency_ms_all": {
+  "count": 120.0,
+  "mean": 918.2,
+  "std": 1261.9,
+  "min": 14.9,
+  "50%": 45.1,
+  "95%": 3061.6,
+  "max": 4071.4
+ },
+ "full_recompute_ms_mean": 24895.212716665807,
+ "checks_identical": "6/6",
+ "speedup_median": 551.7397042383772
+}
