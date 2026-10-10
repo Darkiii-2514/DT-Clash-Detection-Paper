@@ -108,7 +108,7 @@ Software development, experiment execution and manuscript drafting were assisted
 
 ## Citation and licence
 
-A citation will be added once the paper is published. No licence has been chosen yet, so all rights are reserved by the authors until one is added.
+A citation will be added once the paper is published. The code, experiment scripts, result tables and survey kit are released under the [MIT License](LICENSE). The manuscript in `paper/` (text and figures) is not covered by this licence; its rights remain with the authors pending publication.
 
 ## Notes
 
