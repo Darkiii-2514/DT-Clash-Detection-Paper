@@ -306,7 +306,7 @@ Calibrating and validating the severity model with expert ratings, using the rel
 
 **Declaration of competing interest.** The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
 
-**Data availability.** The source code (the pyRevit extension and the Python analysis package), the experiment scripts, the result tables and the expert rating instrument are openly available on GitHub at [GitHub URL]. The case-study models are Autodesk Revit 2027 sample files that are installed with the software and are not redistributed. The raw model exports can be regenerated from them with the released extraction scripts.
+**Data availability.** The source code (the pyRevit extension and the Python analysis package), the experiment scripts, the result tables and the expert rating instrument are openly available on GitHub at <https://github.com/Darkiii-2514/DT-Clash-Detection-Paper>. The case-study models are Autodesk Revit 2027 sample files that are installed with the software and are not redistributed. The raw model exports can be regenerated from them with the released extraction scripts.
 
 **Declaration of generative AI and AI-assisted technologies in the manuscript preparation process.** During the preparation of this work the authors used Claude Code with the Claude Opus 5.5 model (Anthropic) to search the literature, format the references and draft and revise the manuscript text, highlights and captions. The use of the same tool for software development and data analysis is described in Section 4.1. After using this tool, the authors reviewed and edited the content as needed and take full responsibility for the content of the published article.
 
