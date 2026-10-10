@@ -2,7 +2,7 @@
 title: "A Digital Twin-Enabled Framework for Automated Structural Clash Detection and Load Path-Aware Severity Classification in BIM Using Python and Revit API"
 author:
   - 'Maleeha Waseem^a,\*^, Muhammad Arham^a^, Muhammed Ahmed^a^'
-  - '^a^ [Department, University, City, Country]'
+  - '^a^ Department of Civil Engineering, Ghulam Ishaq Khan Institute of Engineering Sciences and Technology, Topi 23640, Swabi, Khyber Pakhtunkhwa, Pakistan'
   - '^\*^ Corresponding author. E-mail addresses: maleehawaseem30@gmail.com (M. Waseem), muhammadarham6333@gmail.com (M. Arham), muhammed.ahmed0999@gmail.com (M. Ahmed).'
 bibliography: refs.bib
 csl: style/elsevier-with-titles.csl
