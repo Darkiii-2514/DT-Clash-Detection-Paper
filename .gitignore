@@ -15,3 +15,7 @@ paper/_build.md
 paper/preview/
 paper/figures/src/example_*.png
 results/*/renders/
+
+# Revit results models (built locally by revit/batch/make_results_model.py; Autodesk samples not redistributed)
+revit/models/
+*.rvt

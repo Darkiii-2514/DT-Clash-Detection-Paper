@@ -38,7 +38,7 @@ The method was developed on Snowdon Towers and frozen before Golden Nugget was a
 
 ```
 revit/DTClash.extension/   pyRevit extension: exporter, change hook, ribbon buttons
-revit/batch/               headless scripts for `pyrevit run` (model export, twin scenarios)
+revit/batch/               headless scripts for `pyrevit run` (model export, results models, twin scenarios)
 src/dtclash/               analysis package (clash, load path, severity, twin)
 tests/                     synthetic cases with known answers + twin equivalence tests
 experiments/               experiment, figure and survey scripts
@@ -95,6 +95,25 @@ Run the live twin while working in Revit (enable sync with the *Twin Sync* butto
 ```bash
 .venv\Scripts\python experiments\twin_service.py data\raw\<model>
 ```
+
+## Results in Revit
+
+**Results models.** `revit/batch/make_results_model.py` saves a copy of each analysed model with the proposed severity written back. The copy opens on a 3D view, *DTClash - Clash severity*, where clashing structural members are coloured by their worst clash class and Critical/Major clashes carry Generic Model markers whose Comments give η, LPCI and the element ids. In that view, MEP is transparent and architectural detail is hidden. The originals are opened detached and never saved, and the copies keep the original file names (so the DTClash tools recognise their elements) with links pointing to the original link files:
+
+```bash
+pyrevit run "%CD%\revit\batch\make_results_model.py" "C:\Program Files\Autodesk\Revit 2027\Samples\Snowdon Towers Sample Structural.rvt" --revit=2027
+pyrevit run "%CD%\revit\batch\make_results_model.py" "C:\Program Files\Autodesk\Revit 2027\Samples\BIM_Projekt_Golden_Nugget-Architektur_und_Ingenieurbau.rvt" --revit=2027
+```
+
+The copies are written to `revit/models/DTClash_results/` (not versioned, because they are derived from Autodesk's sample files). `revit/batch/verify_results_model.py` reopens a copy and reports its starting view, markers, coloured members and link status. Use absolute script paths with `pyrevit run`: Revit runs the script from a temporary working directory.
+
+**DTClash tab.** To get the *Export Twin*, *Twin Sync* and *Show Severity* buttons in Revit 2027, register the extension folder with pyRevit and restart Revit (or use *pyRevit > Reload*):
+
+```bash
+pyrevit extensions paths add "%CD%\revit"
+```
+
+The `doc-changed` hook does nothing until *Twin Sync* is switched on.
 
 ## Expert validation kit
 
