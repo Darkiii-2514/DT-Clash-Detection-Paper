@@ -119,6 +119,12 @@ def add_line_numbers_and_page_numbers(path: Path):
                 t.set(qn("xml:space"), "preserve")
                 t.text = text
                 run._r.append(t)
+    # title block: author names bold, affiliation (italic) and corresponding-author lines regular
+    authors = [p for p in d.paragraphs if p.style.name == "Author"]
+    for i, par in enumerate(authors[1:]):
+        for r in par.runs:
+            r.bold = False
+            r.italic = i == 0
     # tables: thin horizontal rules (booktabs-like), compact single spacing
     for tbl in d.tables:
         tblPr = tbl._tbl.tblPr

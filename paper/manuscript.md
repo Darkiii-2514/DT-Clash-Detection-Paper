@@ -1,7 +1,9 @@
 ---
 title: "A Digital Twin-Enabled Framework for Automated Structural Clash Detection and Load Path-Aware Severity Classification in BIM Using Python and Revit API"
 author:
-  - "[Author name(s) and affiliation(s) — to be completed by the authors]"
+  - 'Maleeha Waseem^a,\*^, Muhammad Arham^a^, Muhammed Ahmed^a^'
+  - '^a^ [Department, University, City, Country]'
+  - '^\*^ Corresponding author. E-mail addresses: maleehawaseem30@gmail.com (M. Waseem), muhammadarham6333@gmail.com (M. Arham), muhammed.ahmed0999@gmail.com (M. Ahmed).'
 bibliography: refs.bib
 csl: style/elsevier-with-titles.csl
 link-citations: true
@@ -298,7 +300,7 @@ Calibrating and validating the severity model with expert ratings, using the rel
 
 # Declarations {.unnumbered}
 
-**CRediT authorship contribution statement.** **[Author 1]:** [roles]. **[Author 2]:** [roles]. [One entry per author, using the CRediT roles: Conceptualization, Data curation, Formal analysis, Funding acquisition, Investigation, Methodology, Project administration, Resources, Software, Supervision, Validation, Visualization, Writing – original draft, Writing – review & editing.]
+**CRediT authorship contribution statement.** **Maleeha Waseem:** Conceptualization, Methodology, Visualization, Writing – original draft, Writing – review & editing. **Muhammad Arham:** Data curation, Formal analysis, Validation, Writing – review & editing. **Muhammed Ahmed:** Conceptualization, Software, Investigation, Resources, Project administration, Writing – review & editing.
 
 **Funding.** This research did not receive any specific grant from funding agencies in the public, commercial, or not-for-profit sectors.
 
