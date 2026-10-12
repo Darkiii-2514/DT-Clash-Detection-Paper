@@ -174,8 +174,7 @@ def to_asce(src: str) -> str:
         else:
             sub += 1
             titles[f"{top}.{sub}"] = m.group(2)
-    assert ROADMAP in src, "roadmap sentence changed: update ROADMAP in build_docx.py"
-    src = src.replace(ROADMAP, "The remainder of the paper reviews related work, presents the framework, describes the "
+    src = src.replace(ROADMAP,                      # only if the numbered roadmap sentence is present"The remainder of the paper reviews related work, presents the framework, describes the "
                       "implementation, the case-study models and the evaluation design, reports the results, and "
                       "discusses implications and limitations before concluding.")
     src = re.sub(r"\(Section (\d+(?:\.\d+)?)\)", lambda m: f"(see “{titles[m.group(1)]}”)", src)

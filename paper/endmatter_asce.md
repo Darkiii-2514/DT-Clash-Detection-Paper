@@ -12,4 +12,4 @@ The two case-study models are sample files provided by Autodesk, Inc. with Autod
 
 # Supplemental Materials {.unnumbered}
 
-Video S1 is available at <https://github.com/Darkiii-2514/DT-Clash-Detection-Paper/blob/master/paper/supplementary/Video_1_digital_twin_demo.mp4>. It shows the digital-twin loop in Revit for one structural change: a beam is lowered by 150 mm, the twin re-analyses the change and the new clash severities are written back, and the beam is then restored. The frames were exported from Revit after each step, and the times shown were measured.
+Video S1 is available at <https://github.com/Darkiii-2514/DT-Clash-Detection-Paper/blob/master/paper/supplementary/Video_1_digital_twin_demo.mp4>. It shows the digital-twin loop in Revit for one structural change; the frames were exported from Revit after each step, and the times shown were measured.
