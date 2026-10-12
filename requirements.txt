@@ -37,3 +37,4 @@ openpyxl
 bibtexparser
 habanero            # Crossref lookup for citation verification
 requests
+imageio-ffmpeg      # MP4 encoding for the supplementary video

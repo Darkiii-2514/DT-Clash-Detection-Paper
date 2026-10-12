@@ -12,6 +12,7 @@
 from __future__ import annotations
 
 import argparse
+import re
 import shutil
 import subprocess
 import sys
@@ -153,14 +154,58 @@ def export_pdf(docx: Path, pdf: Path):
     subprocess.run(["powershell", "-NoProfile", "-Command", ps], check=True)
 
 
+ROADMAP = ("The remainder of the paper is organised as follows. Section 2 reviews related work. Section 3 presents "
+           "the framework. Section 4 describes the implementation, the case-study models and the evaluation design. "
+           "Section 5 reports the results, Section 6 discusses implications and limitations, and Section 7 concludes.")
+
+
+def to_asce(src: str) -> str:
+    """ASCE journals: author-date references, unnumbered headings (so cross-references name the
+    section), Data Availability Statement / Acknowledgments / Supplemental Materials instead of the
+    Elsevier declarations, and supplemental files named Video S1, ..."""
+    titles, top, sub = {}, 0, 0
+    for line in src.splitlines():
+        m = re.match(r"^(#{1,2}) (.+?)\s*$", line)
+        if not m or "{.unnumbered}" in m.group(2):
+            continue
+        if len(m.group(1)) == 1:
+            top, sub = top + 1, 0
+            titles[f"{top}"] = m.group(2)
+        else:
+            sub += 1
+            titles[f"{top}.{sub}"] = m.group(2)
+    assert ROADMAP in src, "roadmap sentence changed: update ROADMAP in build_docx.py"
+    src = src.replace(ROADMAP, "The remainder of the paper reviews related work, presents the framework, describes the "
+                      "implementation, the case-study models and the evaluation design, reports the results, and "
+                      "discusses implications and limitations before concluding.")
+    src = re.sub(r"\(Section (\d+(?:\.\d+)?)\)", lambda m: f"(see “{titles[m.group(1)]}”)", src)
+    src = re.sub(r"Section (\d+(?:\.\d+)?)", lambda m: f"the section “{titles[m.group(1)]}”", src)
+    src = src.replace("Supplementary Video 1", "Video S1")
+    a, b = src.index("# Declarations {.unnumbered}"), src.index("# References {.unnumbered}")
+    src = src[:a] + (PAPER / "endmatter_asce.md").read_text(encoding="utf-8") + "\n" + src[b:]
+    src = src.replace("csl: style/elsevier-with-titles.csl", "csl: style/american-society-of-civil-engineers.csl")
+    # ASCE reference style omits the publisher of journal articles
+    entries = (PAPER / "refs.bib").read_text(encoding="utf-8").split("\n@")
+    kept = [re.sub(r"\s*publisher\s*=\s*\{[^{}]*\},?", "", e, flags=re.I)
+            if e.lower().lstrip("@").startswith("article") else e for e in entries]
+    (PAPER / "refs_asce.bib").write_text("\n@".join(kept), encoding="utf-8")
+    src = src.replace("bibliography: refs.bib", "bibliography: refs_asce.bib")
+    leftover = re.findall(r"Section \d", src)
+    assert not leftover, leftover
+    return src
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--pdf", action="store_true")
     ap.add_argument("--rebuild-reference", action="store_true")
+    ap.add_argument("--journal", choices=("aic", "asce"), default="aic",
+                    help="aic: Elsevier format (manuscript.docx); asce: ASCE format (manuscript_asce.docx)")
     a = ap.parse_args()
     if a.rebuild_reference or not REF.exists():
         make_reference()
-    out = PAPER / "manuscript.docx"
+    asce = a.journal == "asce"
+    out = PAPER / ("manuscript_asce.docx" if asce else "manuscript.docx")
     # regenerate tables from results, then number captions (regenerating drops the labels)
     for tool in ("make_tables.py", "number_captions.py"):
         subprocess.run([sys.executable, str(PAPER / "tools" / tool)], check=True, capture_output=True)
@@ -171,9 +216,13 @@ def main():
     missing = [m for m in ("TABLE3", "TABLE4", "TABLE5") if f"<!--{m}-->" in src]
     if missing:
         print("warning: placeholders not filled:", missing)
-    (PAPER / "_build.md").write_text(src, encoding="utf-8")
-    cmd = [PANDOC, "_build.md", "--citeproc", "--number-sections", "--reference-doc", str(REF),
-           "--resource-path", str(PAPER), "-o", str(out)]
+    if asce:
+        src = to_asce(src)
+    build = PAPER / ("_build_asce.md" if asce else "_build.md")
+    build.write_text(src, encoding="utf-8")
+    cmd = [PANDOC, build.name, "--citeproc", "--reference-doc", str(REF), "--resource-path", str(PAPER), "-o", str(out)]
+    if not asce:
+        cmd.insert(3, "--number-sections")
     r = subprocess.run(cmd, cwd=PAPER, capture_output=True, text=True)
     if r.returncode:
         sys.exit(r.stderr)
@@ -181,7 +230,7 @@ def main():
         print(r.stderr.strip())
     add_line_numbers_and_page_numbers(out)
     hl = PAPER / "highlights.md"
-    if hl.exists():
+    if hl.exists() and not asce:
         subprocess.run([PANDOC, str(hl), "--reference-doc", str(REF), "-o", str(PAPER / "highlights.docx")],
                        check=True)
     print("->", out)

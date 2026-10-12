@@ -19,3 +19,11 @@ results/*/renders/
 # Revit results models (built locally by revit/batch/make_results_model.py; Autodesk samples not redistributed)
 revit/models/
 *.rvt
+
+# Journal submission pack (cover letter and checklist are private correspondence)
+paper/submission/
+
+# Local archives for the authors
+deliverables/
+paper/_build_asce.md
+paper/refs_asce.bib
