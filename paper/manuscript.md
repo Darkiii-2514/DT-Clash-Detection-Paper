@@ -1,9 +1,9 @@
 ---
 title: "A Digital Twin-Enabled Framework for Automated Structural Clash Detection and Load Path-Aware Severity Classification in BIM Using Python and Revit API"
 author:
-  - 'Maleeha Waseem^a,\*^, Muhammad Arham^a^, Muhammad Ahmed^a^'
+  - 'Muhammad Ahmed^a,\*^, Maleeha Waseem^a^, Muhammad Arham^a^'
   - '^a^ Department of Civil Engineering, Ghulam Ishaq Khan Institute of Engineering Sciences and Technology, Topi 23640, Swabi, Khyber Pakhtunkhwa, Pakistan'
-  - '^\*^ Corresponding author. E-mail addresses: maleehawaseem30@gmail.com (Maleeha Waseem), muhammadarham6333@gmail.com (Muhammad Arham), muhammed.ahmed0999@gmail.com (Muhammad Ahmed).'
+  - '^\*^ Corresponding author. E-mail addresses: muhammed.ahmed0999@gmail.com (Muhammad Ahmed), maleehawaseem30@gmail.com (Maleeha Waseem), muhammadarham6333@gmail.com (Muhammad Arham).'
 bibliography: refs.bib
 csl: style/elsevier-with-titles.csl
 link-citations: true
@@ -218,7 +218,7 @@ The graph of Snowdon Towers has 1,185 member nodes and 3,432 support edges, from
 
 Three findings were instructive. (i) With mesh contact alone, 60 members (5.1 %) had no path to the ground. Most were W18x55 girders whose steel geometry is cut back at the connections, leaving a gap to the column larger than the contact tolerance, with no Revit join recorded. Adding member-end proximity reduced the unsupported set to 21, and the revised beam–column rule (Section 5.6) correctly placed two short roof-level columns on the beams they stand on. (ii) The remaining 18 members (1.5 %), 17 short steel beams and channels and one wall, have no modelled support. Flagging such members is a useful by-product of the framework. (iii) Before load was restricted to supports that reach the ground, 5 % of the load "leaked" into the unsupported cluster.
 
-![Fig. 3. Load-path graph of Snowdon Towers. (a) Members coloured by the factored load they carry (log scale); light grey lines are support edges; orange rings mark the 18 members with no path to the ground. (b) Carried load by member type; bars show the median and interquartile range; loads below 1 kN are shown at 1 kN.](figures/fig3_loadpath.png){#fig:lp width=100%}
+![Fig. 3. Load-path graph of Snowdon Towers. (a) Members shaded by the factored load they carry (log scale; darker means more load); thin lines are support edges; open circles mark the 18 members with no path to the ground. (b) Carried load by member type; bars show the median and interquartile range; loads below 1 kN are shown at 1 kN.](figures/fig3_loadpath.png){#fig:lp width=100%}
 
 ## Severity classification (RQ3)
 
@@ -245,7 +245,7 @@ Fig. 7 summarises the one-at-a-time sensitivity analysis for both models. In Sno
 
 ## Digital-twin performance (RQ4)
 
-The initial full synchronisation of Snowdon Towers took 38 s. Over the stream of 120 design changes, the incremental update latency (Fig. 8) had a median of 62 ms for MEP changes (95th percentile 143 ms) and 5.6 s for structural changes (95th percentile 6.4 s). A full recomputation of the same states took 23–27 s (mean 24 s), so MEP changes were processed about 400 times faster. MEP changes require only a few narrow-phase tests, with a median of one candidate pair per event. Structural changes are dominated by re-propagating loads through the graph (median 2.4 s) and by re-assessing every clash (3.2 s), which is done conservatively because a change in support can alter slab and consequence contexts anywhere downstream. At every one of the six checkpoints, the incremental state was **identical** to the full recomputation: the same clash pairs, kinds, classes and $\eta$ to six decimals. The twin also behaved sensibly: deleting MEP elements resolved 11 clashes, adding duplicated runs created 21, and lowering beams by 150 mm created 16 new clashes and resolved 4. In Golden Nugget the corresponding medians were 37 ms and 2.5 s, again with identical results at every checkpoint (Section 5.6).
+The initial full synchronisation of Snowdon Towers took 38 s. Over the stream of 120 design changes, the incremental update latency (Fig. 8) had a median of 62 ms for MEP changes (95th percentile 143 ms) and 5.6 s for structural changes (95th percentile 6.4 s). A full recomputation of the same states took 23–27 s (mean 24 s), so MEP changes were processed about 400 times faster. MEP changes require only a few narrow-phase tests, with a median of one candidate pair per event. Structural changes are dominated by re-propagating loads through the graph (median 2.4 s) and by re-assessing every clash (3.2 s), which is done conservatively because a change in support can alter slab and consequence contexts anywhere downstream. At every one of the six checkpoints, the incremental state was **identical** to the full recomputation: the same clash pairs, kinds, classes and $\eta$ to six decimals. The twin also behaved sensibly: deleting MEP elements resolved 11 clashes, adding duplicated runs created 21, and lowering beams by 150 mm created 16 new clashes and resolved 4. Supplementary Video 1 shows the complete loop in Revit for one structural change. Lowering a W18x86 beam by 150 mm created three hard clashes on it (Critical, Major and Minor), and they appeared in the severity view 6.9 s after the edit: 3.1 s in Revit, which regenerates the beam and the joists attached to it and exports the change, and 3.4 s in the twin service. Restoring the beam returned the model to its 1,296 clashes. In Golden Nugget the corresponding medians were 37 ms and 2.5 s, again with identical results at every checkpoint (Section 5.6).
 
 ![Fig. 8. Incremental update latency of the digital twin for 120 design changes per model; horizontal bars are medians, the dashed lines are the mean times of a full recomputation.](figures/fig8_twin_latency.png){#fig:twin width=75%}
 
@@ -300,7 +300,7 @@ Calibrating and validating the severity model with expert ratings, using the rel
 
 # Declarations {.unnumbered}
 
-**CRediT authorship contribution statement.** **Maleeha Waseem:** Conceptualization, Methodology, Visualization, Writing – original draft, Writing – review & editing. **Muhammad Arham:** Data curation, Formal analysis, Validation, Writing – review & editing. **Muhammad Ahmed:** Conceptualization, Software, Investigation, Resources, Project administration, Writing – review & editing.
+**CRediT authorship contribution statement.** **Muhammad Ahmed:** Conceptualization, Software, Investigation, Resources, Project administration, Writing – review & editing. **Maleeha Waseem:** Conceptualization, Methodology, Visualization, Writing – original draft, Writing – review & editing. **Muhammad Arham:** Data curation, Formal analysis, Validation, Writing – review & editing.
 
 **Funding.** This research did not receive any specific grant from funding agencies in the public, commercial, or not-for-profit sectors.
 
