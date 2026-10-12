@@ -22,6 +22,10 @@ COLORS = {"Critical": (220, 38, 38), "Major": (234, 88, 12), "Minor": (202, 138,
           "Negligible": (100, 116, 139), "Coordination": (37, 99, 235)}
 ORDER = ["Coordination", "Negligible", "Minor", "Major", "Critical"]
 MARK = "DTClash"
+_STRUCT_BICS = List[DB.BuiltInCategory]([
+    DB.BuiltInCategory.OST_StructuralFraming, DB.BuiltInCategory.OST_StructuralColumns,
+    DB.BuiltInCategory.OST_StructuralFoundation, DB.BuiltInCategory.OST_Floors, DB.BuiltInCategory.OST_Walls])
+_STRUCT_FILTER = DB.ElementMulticategoryFilter(_STRUCT_BICS)
 
 
 def element_id(i):
@@ -85,6 +89,12 @@ def apply(doc, view, res, tag):
            if (ds.Name or "").startswith(MARK)]
     if old:
         doc.Delete(List[DB.ElementId](old))
+    # clear colours left from an earlier write-back on members that no longer clash
+    keep = set(int(s) for s in worst)
+    plain = DB.OverrideGraphicSettings()
+    for e in DB.FilteredElementCollector(doc, view.Id).WherePasses(_STRUCT_FILTER).WhereElementIsNotElementType():
+        if e.Id.Value not in keep and view.GetElementOverrides(e.Id).SurfaceForegroundPatternColor.IsValid:
+            view.SetElementOverrides(e.Id, plain)
     n_members = 0
     for sid, sev in worst.items():
         e = doc.GetElement(element_id(sid))

@@ -2,7 +2,7 @@
 
 Code, experiments and manuscript for *"A Digital Twin-Enabled Framework for Automated Structural Clash Detection and Load Path-Aware Severity Classification in BIM Using Python and Revit API"*.
 
-**Authors:** Maleeha Waseem (corresponding, maleehawaseem30@gmail.com), Muhammad Arham, Muhammad Ahmed
+**Authors:** Muhammad Ahmed (corresponding, muhammed.ahmed0999@gmail.com), Maleeha Waseem, Muhammad Arham
 
 **Status:** manuscript in preparation for *Automation in Construction*; not yet peer-reviewed. The severity classes have **not yet been validated against expert judgement** (see [Expert validation kit](#expert-validation-kit)).
 
@@ -106,6 +106,18 @@ pyrevit run "%CD%\revit\batch\make_results_model.py" "C:\Program Files\Autodesk\
 ```
 
 The copies are written to `revit/models/DTClash_results/` (not versioned, because they are derived from Autodesk's sample files). `revit/batch/verify_results_model.py` reopens a copy and reports its starting view, markers, coloured members and link status. Use absolute script paths with `pyrevit run`: Revit runs the script from a temporary working directory.
+
+**Demonstration video.** `paper/supplementary/Video_1_digital_twin_demo.mp4` (Supplementary Video 1 of the paper) shows the live loop: a beam is lowered in Revit, the twin re-analyses the change and the new severities are written back, then the beam is restored. It is assembled from frames that Revit exports after each step, with the measured timings:
+
+```bash
+.venv\Scripts\python experiments\pick_video_beam.py data\raw\Snowdon_Towers_Sample_Structural
+.venv\Scripts\python experiments\twin_service.py data\raw\Snowdon_Towers_Sample_Structural
+set DTCLASH_BEAM=797181
+pyrevit run "%CD%\revit\batch\dt_video.py" "%CD%\revit\models\DTClash_results\Snowdon Towers Sample Structural.rvt" --revit=2027
+.venv\Scripts\python experiments\make_twin_video.py
+```
+
+Keep the twin service running in its own terminal while `dt_video.py` runs. `pick_video_beam.py` dry-runs the change in the twin to pick a beam whose new clashes are clearly visible.
 
 **DTClash tab.** To get the *Export Twin*, *Twin Sync* and *Show Severity* buttons in Revit 2027, register the extension folder with pyRevit and restart Revit (or use *pyRevit > Reload*):
 

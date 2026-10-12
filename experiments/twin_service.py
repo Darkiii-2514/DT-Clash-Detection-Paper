@@ -39,7 +39,14 @@ def publish(tw: DigitalTwin, extra: dict):
     OUTBOX.mkdir(parents=True, exist_ok=True)
     tmp = OUTBOX / "latest.json.tmp"
     tmp.write_text(json.dumps(payload, default=str))
-    tmp.replace(OUTBOX / "latest.json")
+    for attempt in range(100):      # Windows refuses the rename while a reader (Revit) has the file open
+        try:
+            tmp.replace(OUTBOX / "latest.json")
+            break
+        except PermissionError:
+            if attempt == 99:
+                raise
+            time.sleep(0.02)
     (OUTBOX / f"v{tw.version:04d}.json").write_text(json.dumps({k: v for k, v in payload.items() if k != "clashes"}
                                                                 | {"n_clashes": len(rows)}, default=str))
 

@@ -1,0 +1,13 @@
+beam,beam_id,family,type,level,carried_kN,n_new_hard,worst,new_severities,update_ms
+Snowdon_Towers_Sample_Structural:c690db3f-e91a-4318-8124-444acc4e5fc3-000ab3f5,701429,W Shapes,W18x86,R2 TOS,382.2,10,Critical,Critical;Critical;Major;Minor;Minor;Minor;Minor;Minor;Minor;Negligible,3074.5
+Snowdon_Towers_Sample_Structural:54ce3320-0d0c-4217-b277-cd230cc4e4cb-000c29fd,797181,W Shapes,W18x86,L5 TOS,398.3,2,Critical,Critical;Major,2892.7
+Snowdon_Towers_Sample_Structural:e37453ab-55ac-464e-96ef-b2d748a679fc-000942af,606895,Concrete-Rectangular Beam,CB24x30,L1_35_Low,1040.5,6,Major,Major;Minor;Minor;Minor;Minor;Negligible,2965.3
+Snowdon_Towers_Sample_Structural:e37453ab-55ac-464e-96ef-b2d748a679fc-000942a9,606889,Concrete-Rectangular Beam,CB24x30,L1_35_Low,1083.5,4,Major,Major;Minor;Minor;Negligible,2921.4
+Snowdon_Towers_Sample_Structural:e37453ab-55ac-464e-96ef-b2d748a679fc-000945de,607710,Concrete-Rectangular Beam,CB24x24,L1_37_Med,841.9,5,Minor,Minor;Negligible;Negligible;Negligible;Negligible,2944.9
+Snowdon_Towers_Sample_Structural:54ce3320-0d0c-4217-b277-cd230cc4e4cb-000c1634,792116,W Shapes,W18x55,L4 TOS,392.8,3,Minor,Minor;Negligible;Negligible,2958.8
+Snowdon_Towers_Sample_Structural:e37453ab-55ac-464e-96ef-b2d748a679fc-0009429b,606875,Concrete-Rectangular Beam,CB24x24,L1_35_Low,913.8,9,Negligible,Negligible;Negligible;Negligible;Negligible;Negligible;Negligible;Negligible;Negligible;Negligible,2903.4
+Snowdon_Towers_Sample_Structural:e37453ab-55ac-464e-96ef-b2d748a679fc-00094631,607793,Concrete-Rectangular Beam,CB24x24,L1_35_Low,600.1,8,Negligible,Negligible;Negligible;Negligible;Negligible;Negligible;Negligible;Negligible;Negligible,2873.9
+Snowdon_Towers_Sample_Structural:e37453ab-55ac-464e-96ef-b2d748a679fc-0009429d,606877,Concrete-Rectangular Beam,CB24x24,L1_37_Med,1005.9,4,Negligible,Negligible;Negligible;Negligible;Negligible,3109.8
+Snowdon_Towers_Sample_Structural:54ce3320-0d0c-4217-b277-cd230cc4e4cb-000c19ae,793006,W Shapes,W18x55,L5 TOS,415.0,1,Negligible,Negligible,2979.6
+Snowdon_Towers_Sample_Structural:7219f57e-6781-42c8-b33b-d5eee181914c-0009926c,627308,W Shapes,W18x55,L3 TOS,405.9,1,Negligible,Negligible,3102.6
+Snowdon_Towers_Sample_Structural:e37453ab-55ac-464e-96ef-b2d748a679fc-000942ad,606893,Concrete-Rectangular Beam,CB24x30,L1_35_Low,482.7,0,,,3020.8
